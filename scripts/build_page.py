@@ -64,7 +64,11 @@ URL_RE = re.compile(r"https?://[^\s<>\")\]]+")
 
 # Paragraph presentation (flat Word → visual hierarchy)
 STEP_NUM_RE = re.compile(r"^(\d+)\.\s*(.*)$", re.DOTALL)
-TASK_HEAD_RE = re.compile(r"^(Task\s+\d+|TASK\s+\d+)\s*:\s*(.*)$", re.IGNORECASE | re.DOTALL)
+# Task 1–5 headings: colon, equals, or space after number (e.g. "Task 5 klik …", "Task 4 = bonus").
+TASK_HEAD_RE = re.compile(
+    r"^(Task\s+[1-5]|TASK\s+[1-5])(?:\s*:\s*|\s*=\s*|\s+)(.*)$",
+    re.IGNORECASE | re.DOTALL,
+)
 
 
 def classify_paragraph(text: str) -> str:
@@ -91,6 +95,8 @@ def classify_paragraph(text: str) -> str:
         return "lead"
     if re.match(r"^Guna cara yang sama", s, re.IGNORECASE):
         return "lead"
+    if re.match(r"^Ambil perhatian\s+semasa\s+log\s+in\s+ke\s+GC", s, re.IGNORECASE) and "tengok baik-baik gambar" in s.lower():
+        return "gc_login_notice"
     return "body"
 
 # block_index -> list of (button_label, exact_string_to_copy)
@@ -115,15 +121,49 @@ def extract_media() -> None:
             dest.write_bytes(zf.read(name))
 
 
-def paste_ayat_snippets(text: str) -> list[str]:
-    out: list[str] = []
-    for m in re.finditer(
-        r"Paste\s+ayat\s*[–\u2013\-:]\s*([^\n.]+?)(?:\s+Pilih|\s+pilih|\s+Type|\s+Pada|$)",
-        text,
-        flags=re.IGNORECASE,
+def sanitize_exam_copy_text(text: str) -> str:
+    """Strip common Malay instructional prefixes before English exam strings (clipboard accuracy)."""
+    s = (text or "").strip()
+    if not s:
+        return s
+    for pat in (
+        r"^dan\s+kandungan\s+ayat\s*[-–\u2013:\u00A0]\s*",
+        r"^kandungan\s+ayat\s*[-–\u2013:\u00A0]\s*",
+        r"^dan\s+kandungan\s+ayat\s+",
+        r"^kandungan\s+ayat\s+",
     ):
-        s = m.group(1).strip()
-        if s and len(s) < 200:
+        s = re.sub(pat, "", s, flags=re.IGNORECASE).strip()
+    return s
+
+
+def trim_paste_snippet_tail(s: str) -> str:
+    """Remove Malay tails (parentheticals, 'lalu klik …') from extracted paste text."""
+    s = (s or "").strip()
+    if not s:
+        return s
+    s = re.sub(r"\s+lalu\s+klik\b.*$", "", s, flags=re.IGNORECASE).strip()
+    s = re.sub(r"\s+Kemudian\b.*$", "", s, flags=re.IGNORECASE).strip()
+    prev = None
+    while prev != s:
+        prev = s
+        s = re.sub(r"\s*\([^()]{0,400}\)\s*$", "", s).strip()
+    return s
+
+
+def paste_ayat_snippets(text: str) -> list[str]:
+    """English strings after 'Paste ayat' / 'paste ayat' (dash/colon); excludes Malay after the snippet."""
+    out: list[str] = []
+    seen: set[str] = set()
+    # Word-boundary so mid-sentence 'paste ayat:' (e.g. Task 4) matches; stop before Pilih / lalu klik / EOS.
+    pap = re.compile(
+        r"\bPaste\s+ayat\s*[–\u2013\-:]\s*(.+?)(?=\s+Pilih\b|\s+pilih\b|\s+Type\b|\s+Pada\b|\s+lalu\s+klik\b|\s*$)",
+        re.IGNORECASE | re.DOTALL,
+    )
+    for m in pap.finditer(text):
+        s = trim_paste_snippet_tail(m.group(1))
+        s = sanitize_exam_copy_text(s)
+        if s and len(s) < 200 and s not in seen:
+            seen.add(s)
             out.append(s)
     return out
 
@@ -179,6 +219,222 @@ def split_lab3_planet_options(text: str) -> tuple[str, ...] | None:
     if re.search(r"Jupiter\s+Saturn\s+Uranus\s+Neptune", t, re.IGNORECASE):
         return LAB3_PLANETS_OUTER
     return None
+
+
+# Lab 1 GC login: Word order is role picker then Continue (2,1); teach Continue then role.
+LAB1_GC_LOGIN_FIGURE_ORDER = ("image7.png", "image6.png")
+
+# Lab 1 Stream → New announcement: Word order is compose dialog then class Stream (2,1); teach Stream first.
+LAB1_STREAM_ANNOUNCEMENT_FIGURE_ORDER = ("image22.png", "image21.png")
+
+# Lab 2: "Jika tidak dapat drag" — Word order is Move dialog then Drive (2,1); teach as 1 then 2.
+LAB2_DRAG_FIGURE_ORDER = ("image39.png", "image38.png")
+
+# Lab 2 Task 4: Word order is comment pop-up then highlight (2,1); teach highlight first.
+LAB2_TASK4_COMMENT_FIGURE_ORDER = ("image33.png", "image32.png")
+
+# Lab 2 TASK 5: Word order is dialog then menu then Drive (3,2,1); teach 1 → 2 → 3.
+LAB2_TASK5_FOLDER_FIGURE_ORDER = ("image37.png", "image36.png", "image35.png")
+
+# Lab 3 Task 2: Word media order is result → dialog → add-image (3,2,1); teach as 1,2,3.
+LAB3_TASK2_FIGURE_STEP_ORDER = ("image44.png", "image43.png", "image42.png")
+
+
+def lab1_gc_login_figure_order(imgs: list[str], paragraph_text: str) -> tuple[list[str], bool]:
+    """Reorder GC login screenshots; numbered badges 1–2."""
+    if len(imgs) != 2:
+        return imgs, False
+    names = {Path(rel).name for rel in imgs}
+    if names != {"image6.png", "image7.png"}:
+        return imgs, False
+    t = (paragraph_text or "").lower()
+    if "ambil perhatian" not in t or "log in ke gc" not in t:
+        return imgs, False
+    by_name = {Path(rel).name: rel for rel in imgs}
+    ordered = [by_name[n] for n in LAB1_GC_LOGIN_FIGURE_ORDER]
+    return ordered, True
+
+
+def lab1_stream_announcement_figure_order(imgs: list[str], paragraph_text: str) -> tuple[list[str], bool]:
+    """Reorder Stream UI (1) before announcement dialog (2); screenshots already have step marks."""
+    if len(imgs) != 2:
+        return imgs, False
+    names = {Path(rel).name for rel in imgs}
+    if names != {"image21.png", "image22.png"}:
+        return imgs, False
+    t = (paragraph_text or "").lower()
+    if "task terakhir" not in t or "stream" not in t or "new announcement" not in t:
+        return imgs, False
+    by_name = {Path(rel).name: rel for rel in imgs}
+    ordered = [by_name[n] for n in LAB1_STREAM_ANNOUNCEMENT_FIGURE_ORDER]
+    return ordered, False
+
+
+def lab2_drag_figure_order(imgs: list[str], paragraph_text: str) -> tuple[list[str], bool]:
+    """Reorder the two drag-fallback screenshots; numbered badges 1–2."""
+    if len(imgs) != 2:
+        return imgs, False
+    names = {Path(rel).name for rel in imgs}
+    if names != {"image38.png", "image39.png"}:
+        return imgs, False
+    t = (paragraph_text or "").lower()
+    if "tidak dapat drag" not in t:
+        return imgs, False
+    by_name = {Path(rel).name: rel for rel in imgs}
+    ordered = [by_name[n] for n in LAB2_DRAG_FIGURE_ORDER]
+    return ordered, True
+
+
+def lab2_task4_figure_order(imgs: list[str], paragraph_text: str) -> tuple[list[str], bool]:
+    """Reorder highlight step (1) before comment box (2); screenshot labels match."""
+    if len(imgs) != 2:
+        return imgs, False
+    names = {Path(rel).name for rel in imgs}
+    if names != {"image32.png", "image33.png"}:
+        return imgs, False
+    t = (paragraph_text or "").strip()
+    if not re.match(r"^Task\s*4\s*:", t, re.IGNORECASE):
+        return imgs, False
+    if "get red pens" not in t.lower():
+        return imgs, False
+    by_name = {Path(rel).name: rel for rel in imgs}
+    ordered = [by_name[n] for n in LAB2_TASK4_COMMENT_FIGURE_ORDER]
+    return ordered, False
+
+
+def lab2_task5_figure_order(imgs: list[str], paragraph_text: str) -> tuple[list[str], bool]:
+    """Reorder new-folder flow: Drive home (1), +New menu (2), name dialog (3)."""
+    if len(imgs) != 3:
+        return imgs, False
+    names = {Path(rel).name for rel in imgs}
+    if names != {"image35.png", "image36.png", "image37.png"}:
+        return imgs, False
+    t = (paragraph_text or "").strip()
+    if not re.match(r"^TASK\s*5\s*:", t, re.IGNORECASE):
+        return imgs, False
+    if "supply list committee" not in t.lower():
+        return imgs, False
+    by_name = {Path(rel).name: rel for rel in imgs}
+    ordered = [by_name[n] for n in LAB2_TASK5_FOLDER_FIGURE_ORDER]
+    return ordered, False
+
+
+def lab2_doc_task1_figure_badges(imgs: list[str], paragraph_text: str) -> tuple[list[str], bool]:
+    """Lab 2 Task 1 (+new → Google Docs): two steps, show 1–2 on merged screenshots."""
+    if len(imgs) != 2:
+        return imgs, False
+    if [Path(rel).name for rel in imgs] != ["image25.png", "image26.png"]:
+        return imgs, False
+    t = (paragraph_text or "").strip()
+    if not re.match(r"^Task\s*1\s*:", t, re.IGNORECASE) or "google docs" not in t.lower():
+        return imgs, False
+    return imgs, True
+
+
+def lab1_balik_endlab_figure_badges(imgs: list[str], paragraph_text: str) -> tuple[list[str], bool]:
+    """Lab 1: question page (1) then lab progress / End Lab (2)."""
+    if len(imgs) != 2:
+        return imgs, False
+    if [Path(rel).name for rel in imgs] != ["image24.png", "image23.png"]:
+        return imgs, False
+    t = (paragraph_text or "").strip()
+    if not t.startswith("Balik ke laman web soalan") or "Check semua task" not in t:
+        return imgs, False
+    return imgs, True
+
+
+def merge_lab2_task1_images_under_heading(blocks: list[dict]) -> None:
+    """Word puts first screenshot on the intro paragraph; move it under Task 1 (chronological order)."""
+    for i in range(1, len(blocks)):
+        prev, cur = blocks[i - 1], blocks[i]
+        ptxt = (prev.get("text") or "").strip().lower()
+        ctxt = (cur.get("text") or "").strip()
+        if "masuk ke drive lab 2" not in ptxt:
+            continue
+        if not re.match(r"^Task\s*1\s*:\s*Klik\s+butang", ctxt, re.IGNORECASE):
+            continue
+        if "google docs" not in ctxt.lower():
+            continue
+        pim = [Path(x).name for x in (prev.get("images") or [])]
+        cim = [Path(x).name for x in (cur.get("images") or [])]
+        if pim == ["image25.png"] and cim == ["image26.png"]:
+            cur["images"] = ["media/image25.png", "media/image26.png"]
+            prev["images"] = []
+            return
+
+
+def merge_lab2_task2_share_image(blocks: list[dict]) -> None:
+    """Word attaches Share screenshot (image27) to supplies paragraph; it belongs under Task 2."""
+    for i, cur in enumerate(blocks):
+        t = (cur.get("text") or "").strip()
+        if not t.lower().startswith("dan kandungan ayat") or "supplies needed" not in t.lower():
+            continue
+        imgs = [Path(x).name for x in (cur.get("images") or [])]
+        if imgs != ["image27.png", "image28.png"]:
+            continue
+        for j in range(i + 1, min(i + 50, len(blocks))):
+            tj = (blocks[j].get("text") or "").strip()
+            if re.match(r"^Task\s*2\s*:\s*klik\s+share", tj, re.IGNORECASE):
+                share_imgs = list(blocks[j].get("images") or [])
+                blocks[j]["images"] = ["media/image27.png"] + share_imgs
+                cur["images"] = ["media/image28.png"]
+                return
+
+
+def merge_lab1_balik_endlab_figures(blocks: list[dict]) -> None:
+    """Place question-site (image24) and lab UI (image23) in one row: Task 1 then Task 2."""
+    for i, cur in enumerate(blocks):
+        t = (cur.get("text") or "").strip()
+        if not t.startswith("Balik ke laman web soalan") or "Check semua task" not in t:
+            continue
+        cur_im = [Path(x).name for x in (cur.get("images") or [])]
+        if cur_im != ["image23.png"]:
+            continue
+        for j in range(i + 1, min(i + 8, len(blocks))):
+            blk = blocks[j]
+            tt = (blk.get("text") or "").strip()
+            jim = [Path(x).name for x in (blk.get("images") or [])]
+            if not tt and jim == ["image24.png"]:
+                cur["images"] = ["media/image24.png", "media/image23.png"]
+                blk["images"] = []
+                return
+
+
+def merge_lab2_task5_folder_figures(blocks: list[dict]) -> None:
+    """Word puts TASK 5 text and figures on separate blocks; merge and order Drive → menu → dialog."""
+    for i in range(1, len(blocks)):
+        prev, cur = blocks[i - 1], blocks[i]
+        pt = (prev.get("text") or "").strip()
+        if not re.match(r"^TASK\s*5\s*:", pt, re.IGNORECASE):
+            continue
+        if "supply list committee" not in pt.lower():
+            continue
+        if prev.get("images"):
+            continue
+        if (cur.get("text") or "").strip():
+            continue
+        cur_im = [Path(x).name for x in (cur.get("images") or [])]
+        if cur_im != ["image35.png", "image36.png", "image37.png"]:
+            continue
+        prev["images"] = ["media/image37.png", "media/image36.png", "media/image35.png"]
+        cur["images"] = []
+        return
+
+
+def lab3_task2_figure_order(imgs: list[str], paragraph_text: str) -> tuple[list[str], bool]:
+    """Return (images, show_step_badge). Reorder only the known three-step add-image strip."""
+    if len(imgs) != 3:
+        return imgs, False
+    names = {Path(rel).name for rel in imgs}
+    want = set(LAB3_TASK2_FIGURE_STEP_ORDER)
+    if names != want:
+        return imgs, False
+    t = (paragraph_text or "").strip()
+    if not re.search(r"Task\s*2\s*:", t, re.IGNORECASE) or "add image" not in t.lower():
+        return imgs, False
+    by_name = {Path(rel).name: rel for rel in imgs}
+    ordered = [by_name[n] for n in LAB3_TASK2_FIGURE_STEP_ORDER]
+    return ordered, True
 
 
 def build_extra_copies_for_block(
@@ -351,10 +607,10 @@ def wrap_paragraph_block(
             head = html.escape(tag)
             return (
                 f'<h3 class="not-prose mb-3 mt-8 flex flex-wrap items-baseline gap-2 border-l-4 border-slate-700 pl-3 '
-                f'text-base font-semibold text-slate-900 sm:text-[17px]">'
+                f'text-base font-bold text-slate-950 sm:text-[17px]">'
                 f'<span class="shrink-0 rounded-md bg-slate-800 px-2 py-0.5 text-xs font-bold uppercase tracking-wide '
                 f'text-white">{head}</span>'
-                f'<span class="min-w-0 flex-1 font-medium leading-snug text-slate-800">{inner_rest}</span></h3>{copy_rows}'
+                f'<span class="min-w-0 flex-1 font-bold leading-snug text-slate-950">{inner_rest}</span></h3>{copy_rows}'
             )
     if kind == "numbered_step":
         m = STEP_NUM_RE.match(st)
@@ -383,6 +639,10 @@ def wrap_paragraph_block(
     if kind == "lead":
         return (
             f'<p class="not-prose mb-4 text-[15px] font-medium leading-7 text-slate-700">{inner_rich}</p>{copy_rows}'
+        )
+    if kind == "gc_login_notice":
+        return (
+            f'<p class="not-prose mb-3.5 text-[15px] font-bold leading-7 text-slate-950 last:mb-0">{inner_rich}</p>{copy_rows}'
         )
     # body
     return (
@@ -460,18 +720,43 @@ def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, 
         )
 
     if imgs:
+        imgs, step_badge = lab1_gc_login_figure_order(imgs, t)
+        if not step_badge:
+            imgs, step_badge = lab1_stream_announcement_figure_order(imgs, t)
+        if not step_badge:
+            imgs, step_badge = lab2_drag_figure_order(imgs, t)
+        if not step_badge:
+            imgs, step_badge = lab3_task2_figure_order(imgs, t)
+        if not step_badge:
+            imgs, step_badge = lab2_task5_figure_order(imgs, t)
+        if not step_badge:
+            imgs, step_badge = lab2_doc_task1_figure_badges(imgs, t)
+        if not step_badge:
+            imgs, step_badge = lab2_task4_figure_order(imgs, t)
+        if not step_badge:
+            imgs, step_badge = lab1_balik_endlab_figure_badges(imgs, t)
         fig_inner: list[str] = []
-        for rel in imgs:
+        for step_i, rel in enumerate(imgs):
             name = Path(rel).name
             src = "media/" + name
+            badge = ""
+            if step_badge:
+                n = str(step_i + 1)
+                badge = (
+                    f'<span class="pointer-events-none absolute left-2 top-2 z-10 flex h-8 w-8 items-center '
+                    f'justify-center rounded-full bg-rose-600 text-sm font-bold text-white shadow-md ring-2 ring-white" '
+                    f'aria-hidden="true">{html.escape(n)}</span>'
+                )
             fig_inner.append(
+                f'<div class="relative">'
+                f'{badge}'
                 f'<figure class="content-figure not-prose flex min-h-[80px] flex-col overflow-hidden rounded-xl border '
                 f'border-slate-200/90 bg-slate-50 shadow-md ring-1 ring-slate-200/50">'
                 f'<div class="flex flex-1 items-center justify-center p-2 sm:p-4 lg:p-3">'
                 f'<img src="{html.escape(src)}" alt="" '
                 f'class="content-figure-img w-full cursor-zoom-in rounded-md object-contain transition hover:opacity-95 '
                 f'max-h-[min(68vh,520px)] lg:max-h-[min(48vh,540px)]" '
-                f'loading="lazy" decoding="async"></div></figure>'
+                f'loading="lazy" decoding="async"></div></figure></div>'
             )
         if len(fig_inner) == 1:
             inner_parts.append(
@@ -525,6 +810,10 @@ def render_nav_html() -> str:
 
 
 def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> str:
+    merge_lab2_task1_images_under_heading(blocks)
+    merge_lab2_task2_share_image(blocks)
+    merge_lab1_balik_endlab_figures(blocks)
+    merge_lab2_task5_folder_figures(blocks)
     anchor_ids = collect_anchor_ids()
     no_anchor: set[str] = set()
     body_chunks: list[str] = []
@@ -874,13 +1163,13 @@ def main() -> int:
     blocks = json.loads(OUTLINE.read_text(encoding="utf-8"))
     manual: dict[int, list[tuple[str, str]]] = {k: list(v) for k, v in MANUAL_COPIES_STATIC.items()}
     if 95 < len(blocks):
-        t95 = blocks[95].get("text") or ""
+        t95 = sanitize_exam_copy_text(blocks[95].get("text") or "")
         manual[95] = [("Instructions (English)", t95)]
     if 172 < len(blocks):
-        t172 = blocks[172].get("text") or ""
+        t172 = sanitize_exam_copy_text(blocks[172].get("text") or "")
         manual[172] = [("Announcement (English)", t172)]
     if 222 < len(blocks):
-        t222 = blocks[222].get("text") or ""
+        t222 = sanitize_exam_copy_text(blocks[222].get("text") or "")
         manual[222] = [("Isi dokumen (English)", t222)]
 
     out = build_html(blocks, manual)
