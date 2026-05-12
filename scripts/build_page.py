@@ -603,15 +603,26 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
     </div>
   </header>
 
-  <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 lg:flex-row lg:items-stretch">
-    <!-- Mobile TOC -->
-    <details class="group rounded-xl border border-slate-200 bg-white p-4 shadow-sm lg:hidden">
-      <summary class="cursor-pointer text-sm font-semibold text-slate-800">Isi kandungan</summary>
-      <nav class="mt-3 max-h-[50vh] overflow-y-auto text-sm" aria-label="Navigasi">
+  <!-- Mobile: overlay + drawer (same links as desktop sidebar) -->
+  <div id="mobile-nav-layer" class="fixed inset-0 z-[100] hidden lg:hidden" aria-hidden="true">
+    <div id="mobile-nav-overlay" class="absolute inset-0 bg-slate-900/50 backdrop-blur-[2px]"></div>
+    <div class="absolute inset-x-0 bottom-0 flex max-h-[min(85vh,36rem)] flex-col rounded-t-2xl border border-slate-200 bg-white shadow-2xl">
+      <div class="flex shrink-0 items-center justify-between border-b border-slate-100 px-4 py-3">
+        <span class="text-sm font-bold text-slate-900">Navigasi</span>
+        <button type="button" id="mobile-nav-close" class="rounded-lg px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-100">Tutup</button>
+      </div>
+      <nav class="min-h-0 flex-1 overflow-y-auto overscroll-contain p-4 text-sm" aria-label="Navigasi mudah alih">
         {nav_html}
       </nav>
-    </details>
+    </div>
+  </div>
 
+  <button type="button" id="mobile-nav-open" class="fixed left-1/2 z-[90] flex -translate-x-1/2 items-center gap-2 rounded-full border border-indigo-200 bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg ring-2 ring-white/90 hover:bg-indigo-700 lg:hidden" style="bottom: max(1rem, env(safe-area-inset-bottom, 0px));">
+    <svg class="h-5 w-5 shrink-0 opacity-90" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+    Navigasi
+  </button>
+
+  <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 lg:flex-row lg:items-stretch">
     <!-- items-stretch so aside column is as tall as main; inner nav stays sticky while scrolling -->
     <aside class="hidden w-60 shrink-0 lg:block lg:min-h-0" aria-label="Navigasi sisi">
       <nav class="sticky top-20 z-30 max-h-[calc(100vh-5.5rem)] overflow-y-auto rounded-xl border border-slate-200 bg-white p-4 text-sm shadow-sm" id="sidebar-nav">
@@ -620,7 +631,7 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
       </nav>
     </aside>
 
-    <main class="min-w-0 flex-1 rounded-2xl border border-slate-200/80 bg-white p-6 shadow-md sm:p-10 lg:shadow-lg" id="main-content">
+    <main class="min-w-0 flex-1 rounded-2xl border border-slate-200/80 bg-white p-6 pb-24 shadow-md sm:p-10 sm:pb-24 lg:pb-10 lg:shadow-lg" id="main-content">
       <div class="not-prose mb-8 rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm leading-relaxed text-slate-600">
         <strong class="text-slate-800">Cara guna:</strong> gunakan butang <span class="rounded bg-white px-1.5 py-0.5 font-medium text-slate-800 ring-1 ring-slate-200">Salin</span> untuk URL dan teks penting.
         Hoskan pada <strong class="text-slate-800">HTTPS</strong> supaya salin ke papan kereta stabil pada semua pelayar.
@@ -667,6 +678,32 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
           document.body.removeChild(ta);
         }}
       }});
+    }});
+
+    var mobileLayer = document.getElementById("mobile-nav-layer");
+    var mobileOpen = document.getElementById("mobile-nav-open");
+    var mobileClose = document.getElementById("mobile-nav-close");
+    var mobileOverlay = document.getElementById("mobile-nav-overlay");
+    function openMobileNav() {{
+      if (!mobileLayer) return;
+      mobileLayer.classList.remove("hidden");
+      mobileLayer.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }}
+    function closeMobileNav() {{
+      if (!mobileLayer) return;
+      mobileLayer.classList.add("hidden");
+      mobileLayer.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }}
+    if (mobileOpen) mobileOpen.addEventListener("click", openMobileNav);
+    if (mobileClose) mobileClose.addEventListener("click", closeMobileNav);
+    if (mobileOverlay) mobileOverlay.addEventListener("click", closeMobileNav);
+    document.querySelectorAll("#mobile-nav-layer a.nav-link").forEach(function (a) {{
+      a.addEventListener("click", closeMobileNav);
+    }});
+    document.addEventListener("keydown", function (e) {{
+      if (e.key === "Escape" && mobileLayer && !mobileLayer.classList.contains("hidden")) closeMobileNav();
     }});
 
     var navLinks = [].slice.call(document.querySelectorAll("a.nav-link[data-nav-target]"));
