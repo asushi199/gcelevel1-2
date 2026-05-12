@@ -465,17 +465,21 @@ def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, 
             name = Path(rel).name
             src = "media/" + name
             fig_inner.append(
-                f'<figure class="not-prose flex min-h-[100px] flex-col overflow-hidden rounded-xl border '
+                f'<figure class="content-figure not-prose flex min-h-[80px] flex-col overflow-hidden rounded-xl border '
                 f'border-slate-200/90 bg-slate-50 shadow-md ring-1 ring-slate-200/50">'
-                f'<div class="flex flex-1 items-center justify-center p-3 sm:p-5">'
+                f'<div class="flex flex-1 items-center justify-center p-2 sm:p-4 lg:p-3">'
                 f'<img src="{html.escape(src)}" alt="" '
-                f'class="max-h-[min(72vh,800px)] w-full object-contain" loading="lazy"></div></figure>'
+                f'class="content-figure-img w-full cursor-zoom-in rounded-md object-contain transition hover:opacity-95 '
+                f'max-h-[min(68vh,520px)] lg:max-h-[min(48vh,540px)] lg:cursor-default lg:hover:opacity-100" '
+                f'loading="lazy" decoding="async"></div></figure>'
             )
         if len(fig_inner) == 1:
-            inner_parts.append(f'<div class="not-prose my-6">{fig_inner[0]}</div>')
+            inner_parts.append(
+                f'<div class="not-prose my-6 lg:mx-auto lg:max-w-[42rem]">{fig_inner[0]}</div>'
+            )
         else:
             inner_parts.append(
-                '<div class="not-prose my-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:gap-6">'
+                '<div class="not-prose my-6 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:mx-auto lg:max-w-5xl lg:gap-6">'
                 + "".join(fig_inner)
                 + "</div>"
             )
@@ -642,6 +646,21 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
     </main>
   </div>
 
+  <!-- Mobile / narrow: tap image in article to enlarge -->
+  <dialog id="img-lightbox" class="z-[200] m-0 h-[100dvh] w-full max-w-none border-0 bg-slate-950 p-0 text-white outline-none [&::backdrop]:bg-black/70 [&::backdrop]:backdrop-blur-sm" aria-label="Gambar diperbesar">
+    <div class="flex h-full min-h-0 flex-col">
+      <div class="flex shrink-0 items-center justify-between gap-2 border-b border-white/10 px-3 py-2">
+        <span class="text-xs font-medium opacity-90">Klik luar gambar untuk tutup</span>
+        <form method="dialog">
+          <button type="submit" class="rounded-lg bg-white/10 px-3 py-1.5 text-sm font-semibold hover:bg-white/20">Tutup</button>
+        </form>
+      </div>
+      <div id="img-lightbox-body" class="flex min-h-0 flex-1 items-center justify-center overflow-auto p-3 touch-pan-x touch-pan-y">
+        <img id="img-lightbox-img" src="" alt="" class="max-h-[min(86dvh,1100px)] w-auto max-w-full object-contain">
+      </div>
+    </div>
+  </dialog>
+
   <script>
   (function () {{
     document.querySelectorAll(".copy-btn").forEach(function (btn) {{
@@ -705,6 +724,39 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
     document.addEventListener("keydown", function (e) {{
       if (e.key === "Escape" && mobileLayer && !mobileLayer.classList.contains("hidden")) closeMobileNav();
     }});
+
+    var imgLb = document.getElementById("img-lightbox");
+    var imgLbImg = document.getElementById("img-lightbox-img");
+    var imgLbBody = document.getElementById("img-lightbox-body");
+    var mqImg = window.matchMedia("(max-width: 1023px)");
+    function openImgLightbox(src) {{
+      if (!imgLb || !imgLbImg || !src) return;
+      if (!mqImg.matches) return;
+      imgLbImg.src = src;
+      imgLb.showModal();
+    }}
+    function closeImgLightbox() {{
+      if (imgLb && imgLb.open) imgLb.close();
+      if (imgLbImg) imgLbImg.removeAttribute("src");
+    }}
+    document.querySelectorAll("#main-content .content-figure img.content-figure-img").forEach(function (im) {{
+      im.addEventListener("click", function () {{
+        openImgLightbox(im.currentSrc || im.getAttribute("src") || "");
+      }});
+    }});
+    if (imgLbBody) {{
+      imgLbBody.addEventListener("click", function (e) {{
+        if (e.target === imgLbBody) closeImgLightbox();
+      }});
+    }}
+    if (imgLb) {{
+      imgLb.addEventListener("cancel", function () {{
+        if (imgLbImg) imgLbImg.removeAttribute("src");
+      }});
+      imgLb.addEventListener("close", function () {{
+        if (imgLbImg) imgLbImg.removeAttribute("src");
+      }});
+    }}
 
     var navLinks = [].slice.call(document.querySelectorAll("a.nav-link[data-nav-target]"));
     var byId = {{}};
