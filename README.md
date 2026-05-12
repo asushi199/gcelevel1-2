@@ -1,0 +1,62 @@
+# GCE Level 1 — Panduan Lab (Embed)
+
+Static single-page guide generated from Word (`gce level 1.docx`): **Bahasa Malaysia** text, **bold / colour** from the document, **screenshots**, **sidebar navigation**, **copy buttons** for URLs and fixed phrases, and **image lightbox** with zoom (+/−, pinch, Ctrl+wheel).
+
+## Live site (GitHub Pages)
+
+After enabling Pages on the `main` branch (root):
+
+**https://asushi199.github.io/gcelevel1-2/**
+
+If the URL differs, check **Settings → Pages** in this repository.
+
+## Repository layout
+
+| Path | Description |
+|------|-------------|
+| `index.html` | Built page (Tailwind CDN + inline scripts). |
+| `media/` | PNG assets extracted from the `.docx` when you run the build script. |
+| `scripts/extract_docx.py` | Reads `../gce level 1.docx` → `scripts/outline.json` (paragraphs + runs + image refs). |
+| `scripts/build_page.py` | Writes `index.html` and refreshes `media/` from the docx. |
+| `scripts/outline.json` | Intermediate JSON (optional to commit; useful for diffing). |
+
+The Word file is expected at **`../gce level 1.docx`** relative to this folder (i.e. `GCEsite/gce level 1.docx` next to `gce-level-1-embed/`).
+
+## Regenerate the page (local)
+
+From **this folder** (`gce-level-1-embed`):
+
+```powershell
+py -3 scripts/extract_docx.py
+py -3 scripts/build_page.py
+```
+
+Requirements: **Python 3** only (stdlib: `zipfile`, `xml.etree`, etc.). No `pip install` needed for the scripts as shipped.
+
+Then open `index.html` in a browser, or serve the folder:
+
+```powershell
+py -3 -m http.server 8080
+```
+
+Browse to `http://localhost:8080/` (HTTPS recommended for clipboard “Salin” on some devices).
+
+## Features (short)
+
+- **Navigation**: Desktop sticky sidebar; mobile floating **Navigasi** button + drawer.
+- **Copy blocks**: Green “Salin” rows for fixed text; inline Salin next to detected URLs.
+- **Images**: Responsive layout; click to open lightbox; **+/−**, **reset %**, **two-finger pinch**, **Ctrl + trackpad zoom** inside the lightbox.
+- **Lab 3 planet options**: One “4 pilihan (satu baris satu nama)” copy row per MC / Dropdown paragraph.
+
+## Git push
+
+```powershell
+cd path\to\gce-level-1-embed
+git add .
+git commit -m "Describe your change"
+git push origin main
+```
+
+## Licence / content
+
+Instructional content belongs to the course or institution that produced the original Word document. This repository only hosts the **generated HTML tooling** and output for distribution.

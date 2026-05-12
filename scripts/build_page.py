@@ -470,7 +470,7 @@ def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, 
                 f'<div class="flex flex-1 items-center justify-center p-2 sm:p-4 lg:p-3">'
                 f'<img src="{html.escape(src)}" alt="" '
                 f'class="content-figure-img w-full cursor-zoom-in rounded-md object-contain transition hover:opacity-95 '
-                f'max-h-[min(68vh,520px)] lg:max-h-[min(48vh,540px)] lg:cursor-default lg:hover:opacity-100" '
+                f'max-h-[min(68vh,520px)] lg:max-h-[min(48vh,540px)]" '
                 f'loading="lazy" decoding="async"></div></figure>'
             )
         if len(fig_inner) == 1:
@@ -646,17 +646,26 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
     </main>
   </div>
 
-  <!-- Mobile / narrow: tap image in article to enlarge -->
+  <!-- Image lightbox: click any figure in article to enlarge (desktop + mobile); pinch / buttons to zoom -->
   <dialog id="img-lightbox" class="z-[200] m-0 h-[100dvh] w-full max-w-none border-0 bg-slate-950 p-0 text-white outline-none [&::backdrop]:bg-black/70 [&::backdrop]:backdrop-blur-sm" aria-label="Gambar diperbesar">
     <div class="flex h-full min-h-0 flex-col">
-      <div class="flex shrink-0 items-center justify-between gap-2 border-b border-white/10 px-3 py-2">
-        <span class="text-xs font-medium opacity-90">Klik luar gambar untuk tutup</span>
-        <form method="dialog">
-          <button type="submit" class="rounded-lg bg-white/10 px-3 py-1.5 text-sm font-semibold hover:bg-white/20">Tutup</button>
-        </form>
+      <div class="flex shrink-0 flex-col gap-2 border-b border-white/10 px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
+        <span class="max-w-[min(100%,20rem)] text-xs font-medium leading-snug opacity-90 sm:max-w-none">Cubit jari (pinch) atau butang +/− untuk zum. Klik kawasan kosong, Tutup, atau Esc untuk keluar.</span>
+        <div class="flex flex-wrap items-center justify-end gap-2">
+          <div class="flex items-center gap-1 rounded-lg bg-white/10 p-1" role="group" aria-label="Zoom gambar">
+            <button type="button" id="img-lb-zoom-out" class="min-h-[44px] min-w-[44px] rounded-md text-xl font-bold leading-none text-white hover:bg-white/15 active:bg-white/25">−</button>
+            <button type="button" id="img-lb-zoom-reset" class="min-h-[44px] min-w-[52px] rounded-md text-xs font-semibold tabular-nums text-white hover:bg-white/15 active:bg-white/25">100%</button>
+            <button type="button" id="img-lb-zoom-in" class="min-h-[44px] min-w-[44px] rounded-md text-xl font-bold leading-none text-white hover:bg-white/15 active:bg-white/25">+</button>
+          </div>
+          <form method="dialog">
+            <button type="submit" class="rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold hover:bg-white/20">Tutup</button>
+          </form>
+        </div>
       </div>
-      <div id="img-lightbox-body" class="flex min-h-0 flex-1 items-center justify-center overflow-auto p-3 touch-pan-x touch-pan-y">
-        <img id="img-lightbox-img" src="" alt="" class="max-h-[min(86dvh,1100px)] w-auto max-w-full object-contain">
+      <div id="img-lightbox-body" class="relative flex min-h-0 flex-1 overflow-auto overscroll-contain p-3" style="touch-action: pan-x pan-y pinch-zoom;">
+        <div id="img-lb-zoom-wrap" class="m-auto flex min-h-min min-w-min items-center justify-center p-2 will-change-transform" style="transform: scale(1); transform-origin: center center;">
+          <img id="img-lightbox-img" src="" alt="" class="max-h-[min(86dvh,1100px)] w-auto max-w-[min(100vw,1100px)] object-contain select-none" draggable="false">
+        </div>
       </div>
     </div>
   </dialog>
@@ -728,33 +737,99 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
     var imgLb = document.getElementById("img-lightbox");
     var imgLbImg = document.getElementById("img-lightbox-img");
     var imgLbBody = document.getElementById("img-lightbox-body");
-    var mqImg = window.matchMedia("(max-width: 1023px)");
+    var imgLbWrap = document.getElementById("img-lb-zoom-wrap");
+    var imgLbZoomIn = document.getElementById("img-lb-zoom-in");
+    var imgLbZoomOut = document.getElementById("img-lb-zoom-out");
+    var imgLbZoomReset = document.getElementById("img-lb-zoom-reset");
+    var lbScale = 1;
+    var LB_MIN = 0.35;
+    var LB_MAX = 5;
+    var pinchStartDist = 0;
+    var pinchStartScale = 1;
+    function lbClamp(s) {{
+      return Math.max(LB_MIN, Math.min(LB_MAX, s));
+    }}
+    function lbApplyScale() {{
+      if (!imgLbWrap) return;
+      lbScale = lbClamp(lbScale);
+      imgLbWrap.style.transform = "scale(" + lbScale + ")";
+      imgLbWrap.style.transformOrigin = "center center";
+      if (imgLbZoomReset) imgLbZoomReset.textContent = Math.round(lbScale * 100) + "%";
+    }}
+    function lbResetZoom() {{
+      lbScale = 1;
+      pinchStartDist = 0;
+      lbApplyScale();
+    }}
     function openImgLightbox(src) {{
       if (!imgLb || !imgLbImg || !src) return;
-      if (!mqImg.matches) return;
+      lbResetZoom();
       imgLbImg.src = src;
       imgLb.showModal();
     }}
     function closeImgLightbox() {{
       if (imgLb && imgLb.open) imgLb.close();
       if (imgLbImg) imgLbImg.removeAttribute("src");
+      lbResetZoom();
     }}
     document.querySelectorAll("#main-content .content-figure img.content-figure-img").forEach(function (im) {{
       im.addEventListener("click", function () {{
         openImgLightbox(im.currentSrc || im.getAttribute("src") || "");
       }});
     }});
+    if (imgLbZoomIn) imgLbZoomIn.addEventListener("click", function (e) {{
+      e.stopPropagation();
+      lbScale = lbClamp(lbScale + 0.25);
+      lbApplyScale();
+    }});
+    if (imgLbZoomOut) imgLbZoomOut.addEventListener("click", function (e) {{
+      e.stopPropagation();
+      lbScale = lbClamp(lbScale - 0.25);
+      lbApplyScale();
+    }});
+    if (imgLbZoomReset) imgLbZoomReset.addEventListener("click", function (e) {{
+      e.stopPropagation();
+      lbResetZoom();
+    }});
+    function lbTouchDist(a, b) {{
+      return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+    }}
     if (imgLbBody) {{
       imgLbBody.addEventListener("click", function (e) {{
         if (e.target === imgLbBody) closeImgLightbox();
       }});
+      imgLbBody.addEventListener("touchstart", function (e) {{
+        if (!imgLb || !imgLb.open) return;
+        if (e.touches.length === 2) {{
+          pinchStartDist = lbTouchDist(e.touches[0], e.touches[1]);
+          pinchStartScale = lbScale;
+        }}
+      }}, {{ passive: true }});
+      imgLbBody.addEventListener("touchmove", function (e) {{
+        if (!imgLb || !imgLb.open) return;
+        if (e.touches.length === 2 && pinchStartDist > 10) {{
+          e.preventDefault();
+          var d = lbTouchDist(e.touches[0], e.touches[1]);
+          lbScale = lbClamp(pinchStartScale * (d / pinchStartDist));
+          lbApplyScale();
+        }}
+      }}, {{ passive: false }});
+      imgLbBody.addEventListener("touchend", function (e) {{
+        if (!e.touches || e.touches.length < 2) pinchStartDist = 0;
+      }}, {{ passive: true }});
+      imgLbBody.addEventListener("wheel", function (e) {{
+        if (!imgLb || !imgLb.open) return;
+        if (e.ctrlKey) {{
+          e.preventDefault();
+          lbScale = lbClamp(lbScale - e.deltaY * 0.012);
+          lbApplyScale();
+        }}
+      }}, {{ passive: false }});
     }}
     if (imgLb) {{
-      imgLb.addEventListener("cancel", function () {{
-        if (imgLbImg) imgLbImg.removeAttribute("src");
-      }});
       imgLb.addEventListener("close", function () {{
         if (imgLbImg) imgLbImg.removeAttribute("src");
+        lbResetZoom();
       }});
     }}
 
