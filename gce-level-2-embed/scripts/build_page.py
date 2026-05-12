@@ -258,6 +258,21 @@ def lab2_task2_invite_figure_order(imgs: list[str]) -> tuple[list[str], bool]:
     return ordered, True
 
 
+def lab2_calendar_event_intro_figure_order(imgs: list[str]) -> list[str]:
+    """Lab 2 Google Calendar: Word embeds panel 2 (left) then panel 1 (right); teach red badge 1 then 2."""
+    if len(imgs) != 2:
+        return imgs
+    names = {Path(x).name for x in imgs}
+    if names != {"image27.png", "image28.png"}:
+        return imgs
+    by_name = {Path(rel).name: rel for rel in imgs}
+    return [by_name["image28.png"], by_name["image27.png"]]
+
+
+def lab2_calendar_event_intro_step_badges(imgs: list[str]) -> bool:
+    return len(imgs) == 2 and {Path(x).name for x in imgs} == {"image27.png", "image28.png"}
+
+
 def build_nav_l2(blocks: list[dict]) -> list[NavEntry]:
     out: list[NavEntry] = []
     cara_idx: int | None = None
@@ -487,6 +502,8 @@ def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, 
     imgs = list(blk.get("images") or [])
     imgs = cara_end_exam_figure_order(imgs, t)
     imgs, invite_step_badges = lab2_task2_invite_figure_order(imgs)
+    imgs = lab2_calendar_event_intro_figure_order(imgs)
+    calendar_intro_badges = lab2_calendar_event_intro_step_badges(imgs)
     rows = blk.get("rows")
     bid = f"b-{idx}"
 
@@ -559,7 +576,7 @@ def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, 
             name = Path(rel).name
             src = "media/" + name
             badge = ""
-            if invite_step_badges:
+            if invite_step_badges or calendar_intro_badges:
                 n = str(step_i + 1)
                 badge = (
                     f'<span class="pointer-events-none absolute left-2 top-2 z-10 flex h-8 w-8 items-center '
