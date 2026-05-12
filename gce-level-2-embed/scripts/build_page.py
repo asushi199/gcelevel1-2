@@ -41,6 +41,8 @@ TASK_REF_PAREN_RE = re.compile(
     r"\([^)]*\b(?:gambar\s+)?task\s*\d+\s*[a-z]?[^)]*\)",
     re.IGNORECASE,
 )
+# Editor-only picture markers (not shown on site)
+PICTURE_REF_PAREN_RE = re.compile(r"\(\s*picture\s*\d+\s*\)", re.IGNORECASE)
 
 NavEntry = tuple[str, str, int | None, list[tuple[str, str, int]] | None]
 
@@ -135,11 +137,13 @@ def _find_salin_copy_text(flat: str, meta: list[tuple[bool, str | None]], m_star
         tail = segs[-1].strip()
         tail = re.sub(r"\s+", " ", tail)
         tail = TASK_REF_PAREN_RE.sub("", tail)
+        tail = PICTURE_REF_PAREN_RE.sub("", tail)
         tail = SALIN_MARKER_RE.sub("", tail).strip()
         if tail and len(tail) < 200:
             return tail
     tail = head.strip()
     tail = TASK_REF_PAREN_RE.sub("", tail)
+    tail = PICTURE_REF_PAREN_RE.sub("", tail)
     tail = SALIN_MARKER_RE.sub("", tail)
     tail = re.sub(r"\s+", " ", tail).strip()
     if tail and len(tail) < 200:
@@ -162,6 +166,8 @@ def extract_salin_and_strip_reference_parens(runs: list[dict]) -> tuple[list[dic
         remove_spans.append(m.span())
     for m in TASK_REF_PAREN_RE.finditer(flat):
         remove_spans.append(m.span())
+    for m in PICTURE_REF_PAREN_RE.finditer(flat):
+        remove_spans.append(m.span())
     if not remove_spans:
         return merge_adjacent_runs_list(runs), copies
     merged = _merge_intervals(remove_spans)
@@ -182,31 +188,29 @@ def find_end_exam_range(blocks: list[dict]) -> tuple[int, int] | None:
     return None
 
 
-def find_anchor_after_masuk_lab_drive(blocks: list[dict]) -> int:
-    """Block index after which to insert the Cara end exam section (fallback: after title)."""
-    for i, blk in enumerate(blocks):
-        t = (blk.get("text") or "").strip()
-        if re.search(r"(?i)cara\s+untuk\s+masuk", t):
-            return i
-        if re.search(r"(?i)cara\s+masuk\s+lab\s+drive", t):
-            return i
-    for i, blk in enumerate(blocks[:80]):
-        t = (blk.get("text") or "").strip()
-        if re.search(r"(?i)\bmasuk\b.*\blab\s+drive\b", t):
-            return i
-    return 0
-
-
-def reorder_end_exam_blocks(blocks: list[dict]) -> list[dict]:
+def move_cara_end_exam_to_end(blocks: list[dict]) -> list[dict]:
+    """Keep Cara end exam as the closing section (after all labs)."""
     rng = find_end_exam_range(blocks)
     if not rng:
         return blocks
     s, e = rng
     chunk = blocks[s:e]
-    head = blocks[:s]
-    anchor = find_anchor_after_masuk_lab_drive(head)
-    insert_at = anchor + 1
-    return head[:insert_at] + chunk + head[insert_at:]
+    rest = blocks[:s] + blocks[e:]
+    return rest + chunk
+
+
+def cara_end_exam_figure_order(imgs: list[str], paragraph_text: str) -> list[str]:
+    """Word order was dashboard then breadcrumb; teach breadcrumb (image62) first, then End Exam (image61)."""
+    if len(imgs) != 2:
+        return imgs
+    names = [Path(x).name for x in imgs]
+    if set(names) != {"image61.png", "image62.png"}:
+        return imgs
+    t = (paragraph_text or "").lower()
+    if "laman web soalan" not in t:
+        return imgs
+    by_name = {Path(rel).name: rel for rel in imgs}
+    return [by_name["image62.png"], by_name["image61.png"]]
 
 
 def build_nav_l2(blocks: list[dict]) -> list[NavEntry]:
@@ -216,8 +220,6 @@ def build_nav_l2(blocks: list[dict]) -> list[NavEntry]:
         if (blk.get("text") or "").strip().lower() == "cara end exam":
             cara_idx = i
             break
-    if cara_idx is not None:
-        out.append(("cara-end-exam", "Cara end exam", cara_idx, None))
     lab_count = 0
     children: list[tuple[str, str, int]] | None = None
     for i, blk in enumerate(blocks):
@@ -232,6 +234,8 @@ def build_nav_l2(blocks: list[dict]) -> list[NavEntry]:
             assert m is not None
             tid = f"lab-{lab_count}-task-{m.group(2)}"
             children.append((tid, t[:72], i))
+    if cara_idx is not None:
+        out.append(("cara-end-exam", "Cara end exam", cara_idx, None))
     return out
 
 
@@ -435,7 +439,8 @@ def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, 
     blk["text"] = "".join(r["t"] for r in runs_proc).strip()
 
     t = blk.get("text") or ""
-    imgs = blk.get("images") or []
+    imgs = list(blk.get("images") or [])
+    imgs = cara_end_exam_figure_order(imgs, t)
     rows = blk.get("rows")
     bid = f"b-{idx}"
 
@@ -613,6 +618,12 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]], nav
         if re.match(r"^GCE\s+LEVEL\s+2", t, re.IGNORECASE) and re.search(r"\bLAB\b", t, re.IGNORECASE):
             lab_starts.append(i)
 
+    cara_start: int | None = None
+    for i, blk in enumerate(blocks):
+        if (blk.get("text") or "").strip().lower() == "cara end exam":
+            cara_start = i
+            break
+
     body_chunks: list[str] = []
     if not lab_starts:
         body_chunks.append(
@@ -626,11 +637,26 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]], nav
         body_chunks.append("</div>")
     else:
         for li, start in enumerate(lab_starts):
-            end = lab_starts[li + 1] if li + 1 < len(lab_starts) else len(blocks)
+            next_start = lab_starts[li + 1] if li + 1 < len(lab_starts) else len(blocks)
+            end = next_start
+            if cara_start is not None and start <= cara_start < end:
+                end = cara_start
             title = (blocks[start].get("text") or f"Lab {li + 1}").strip()
             short = re.sub(r"^GCE\s+LEVEL\s+2\s*[–-]\s*", "", title, flags=re.IGNORECASE).strip() or title
             body_chunks.append(_lab_section_shell_open(li, short))
             for i in range(start, end):
+                ch = render_block(i, blocks[i], anchor_ids, manual)
+                if ch:
+                    body_chunks.append(ch)
+            body_chunks.append("</section>")
+        if cara_start is not None:
+            body_chunks.append(
+                '<section class="lab-section mx-auto mb-8 max-w-[52rem] scroll-mt-24 rounded-2xl border-2 border-slate-200 '
+                'bg-gradient-to-b from-slate-50/90 to-white p-6 shadow-sm sm:p-8" aria-label="Cara end exam">'
+                '<header class="not-prose mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600">'
+                '<span class="h-1.5 w-1.5 rounded-full bg-slate-400"></span>Tamat peperiksaan</header>'
+            )
+            for i in range(cara_start, len(blocks)):
                 ch = render_block(i, blocks[i], anchor_ids, manual)
                 if ch:
                     body_chunks.append(ch)
@@ -646,8 +672,11 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]], nav
 </head>
 <body class="min-h-screen bg-slate-100 text-slate-900 antialiased">
   <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-    <div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
-      <h1 class="text-lg font-semibold tracking-tight text-slate-900">GCE Level 2</h1>
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+      <div class="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
+        <a href="../levels.html" class="shrink-0 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50">← Senarai</a>
+        <h1 class="text-lg font-semibold tracking-tight text-slate-900">GCE Level 2</h1>
+      </div>
       <p class="hidden text-sm text-slate-500 sm:block">Panduan langkah demi langkah · salin teks dengan selamat</p>
     </div>
   </header>
@@ -1003,7 +1032,7 @@ def main() -> int:
         return 1
     extract_media()
     blocks: list[dict] = json.loads(OUTLINE.read_text(encoding="utf-8"))
-    blocks = reorder_end_exam_blocks(blocks)
+    blocks = move_cara_end_exam_to_end(blocks)
     nav = build_nav_l2(blocks)
     manual: dict[int, list[tuple[str, str]]] = {}
     out = build_html(blocks, manual, nav)

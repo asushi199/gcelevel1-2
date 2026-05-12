@@ -58,6 +58,7 @@ NAV: list[tuple[str, str, int | None, list[tuple[str, str, int]] | None]] = [
         ],
     ),
     ("selesai", "Selesai", 450, None),
+    ("cara-end-exam", "Cara end exam", 451, None),
 ]
 
 URL_RE = re.compile(r"https?://[^\s<>\")\]]+")
@@ -809,6 +810,43 @@ def render_nav_html() -> str:
     return "\n".join(lines)
 
 
+def render_cara_end_exam_footer_html() -> str:
+    """Same instructions as Level 2 doc: image62 (breadcrumb) first, image61 (End Exam) second."""
+    img_a = "../gce-level-2-embed/media/image62.png"
+    img_b = "../gce-level-2-embed/media/image61.png"
+    p1 = "Di laman web soalan klik link ikut gambar di bawah."
+    p2 = "Scroll ke bawah, klik butang [End Exam]"
+
+    def one_fig(src: str) -> str:
+        return (
+            f'<div class="relative">'
+            f'<figure class="content-figure not-prose flex min-h-[80px] flex-col overflow-hidden rounded-xl border '
+            f'border-slate-200/90 bg-slate-50 shadow-md ring-1 ring-slate-200/50">'
+            f'<div class="flex flex-1 items-center justify-center p-2 sm:p-4 lg:p-3">'
+            f'<img src="{html.escape(src)}" alt="" '
+            f'class="content-figure-img w-full cursor-zoom-in rounded-md object-contain transition hover:opacity-95 '
+            f'max-h-[min(68vh,520px)] lg:max-h-[min(48vh,540px)]" '
+            f'loading="lazy" decoding="async"></div></figure></div>'
+        )
+
+    grid = (
+        '<div class="not-prose my-6 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:mx-auto lg:max-w-5xl lg:gap-6">'
+        + one_fig(img_a)
+        + one_fig(img_b)
+        + "</div>"
+    )
+    return (
+        '<section id="b-451" class="anchor-block mx-auto mb-10 max-w-[52rem] scroll-mt-28 rounded-2xl border-2 border-slate-200 '
+        'bg-gradient-to-b from-slate-50/90 to-white p-6 shadow-sm sm:p-8" aria-label="Cara end exam">'
+        '<header class="not-prose mb-4 text-xs font-bold uppercase tracking-wider text-slate-600">Tamat peperiksaan</header>'
+        '<h2 class="not-prose mb-4 mt-0 border-b border-slate-200 pb-2 text-xl font-bold text-slate-900">Cara end exam</h2>'
+        f'<p class="not-prose mb-3.5 text-[15px] leading-7 text-slate-700">{html.escape(p1)}</p>'
+        f"{grid}"
+        f'<p class="not-prose mb-3.5 text-[15px] leading-7 text-slate-700">{html.escape(p2)}</p>'
+        "</section>"
+    )
+
+
 def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> str:
     merge_lab2_task1_images_under_heading(blocks)
     merge_lab2_task2_share_image(blocks)
@@ -878,6 +916,8 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
             body_chunks.append(chunk)
     body_chunks.append("</section>")
 
+    body_chunks.append(render_cara_end_exam_footer_html())
+
     nav_html = render_nav_html()
 
     return f"""<!DOCTYPE html>
@@ -890,8 +930,11 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
 </head>
 <body class="min-h-screen bg-slate-100 text-slate-900 antialiased">
   <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-    <div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
-      <h1 class="text-lg font-semibold tracking-tight text-slate-900">GCE Level 1</h1>
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+      <div class="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
+        <a href="./levels.html" class="shrink-0 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50">← Senarai</a>
+        <h1 class="text-lg font-semibold tracking-tight text-slate-900">GCE Level 1</h1>
+      </div>
       <p class="hidden text-sm text-slate-500 sm:block">Panduan langkah demi langkah · salin teks dengan selamat</p>
     </div>
   </header>
