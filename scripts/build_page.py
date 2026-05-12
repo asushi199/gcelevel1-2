@@ -102,7 +102,7 @@ def classify_paragraph(text: str) -> str:
 # block_index -> list of (button_label, exact_string_to_copy)
 MANUAL_COPIES_STATIC: dict[int, list[tuple[str, str]]] = {
     42: [("Arahan Gemini", "bagi jawapan tanpa penerangan")],
-    79: [("Nama kelas", "Geography.")],
+    79: [("Nama kelas", "Geography")],
     93: [("Nama assignment", "Capital Cities")],
     125: [("Nama topic", "Cities")],
     221: [("Tajuk dokumen", "Supply List")],
