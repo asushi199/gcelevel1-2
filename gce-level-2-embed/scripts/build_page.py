@@ -213,6 +213,40 @@ def cara_end_exam_figure_order(imgs: list[str], paragraph_text: str) -> list[str
     return [by_name["image62.png"], by_name["image61.png"]]
 
 
+def merge_lab2_task2_invite_images(blocks: list[dict]) -> None:
+    """Merge image4–7 + image8–9 into the TASK2 invite paragraph (Word splits figures across empty runs)."""
+    for i, blk in enumerate(blocks):
+        t = (blk.get("text") or "").strip().lower()
+        if "invite mereka ke dalam google classroom" not in t:
+            continue
+        if "task2b" not in t or "task2g" not in t:
+            continue
+        merged = list(blk.get("images") or [])
+        k = i + 1
+        while k < len(blocks):
+            nxt = blocks[k]
+            if (nxt.get("text") or "").strip():
+                break
+            extra = list(nxt.get("images") or [])
+            if extra:
+                merged.extend(extra)
+                nxt["images"] = []
+            k += 1
+        blk["images"] = merged
+        return
+
+
+def lab2_task2_invite_figure_order(imgs: list[str]) -> tuple[list[str], bool]:
+    """Badge order 1→6 vs Word export order (layout row1 2|1, row3 6|5). Returns (reordered, show 1–6 badges)."""
+    names_set = {Path(x).name for x in imgs}
+    want = {f"image{n}.png" for n in range(4, 10)}
+    if len(imgs) != 6 or names_set != want:
+        return imgs, False
+    by_name = {Path(rel).name: rel for rel in imgs}
+    ordered = [by_name[f"image{n}.png"] for n in (5, 4, 6, 7, 9, 8)]
+    return ordered, True
+
+
 def build_nav_l2(blocks: list[dict]) -> list[NavEntry]:
     out: list[NavEntry] = []
     cara_idx: int | None = None
@@ -441,6 +475,7 @@ def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, 
     t = blk.get("text") or ""
     imgs = list(blk.get("images") or [])
     imgs = cara_end_exam_figure_order(imgs, t)
+    imgs, invite_step_badges = lab2_task2_invite_figure_order(imgs)
     rows = blk.get("rows")
     bid = f"b-{idx}"
 
@@ -509,11 +544,20 @@ def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, 
 
     if imgs:
         fig_inner: list[str] = []
-        for rel in imgs:
+        for step_i, rel in enumerate(imgs):
             name = Path(rel).name
             src = "media/" + name
+            badge = ""
+            if invite_step_badges:
+                n = str(step_i + 1)
+                badge = (
+                    f'<span class="pointer-events-none absolute left-2 top-2 z-10 flex h-8 w-8 items-center '
+                    f'justify-center rounded-full bg-rose-600 text-sm font-bold text-white shadow-md ring-2 ring-white" '
+                    f'aria-hidden="true">{html.escape(n)}</span>'
+                )
             fig_inner.append(
                 f'<div class="relative">'
+                f"{badge}"
                 f'<figure class="content-figure not-prose flex min-h-[80px] flex-col overflow-hidden rounded-xl border '
                 f'border-slate-200/90 bg-slate-50 shadow-md ring-1 ring-slate-200/50">'
                 f'<div class="flex flex-1 items-center justify-center p-2 sm:p-4 lg:p-3">'
@@ -524,6 +568,10 @@ def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, 
             )
         if len(fig_inner) == 1:
             inner_parts.append(f'<div class="not-prose my-6 lg:mx-auto lg:max-w-[42rem]">{fig_inner[0]}</div>')
+        elif invite_step_badges:
+            inner_parts.append(
+                '<div class="not-prose my-6 flex flex-col gap-4 lg:mx-auto lg:max-w-[42rem]">' + "".join(fig_inner) + "</div>"
+            )
         else:
             inner_parts.append(
                 '<div class="not-prose my-6 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:mx-auto lg:max-w-5xl lg:gap-6">'
@@ -1033,6 +1081,7 @@ def main() -> int:
     extract_media()
     blocks: list[dict] = json.loads(OUTLINE.read_text(encoding="utf-8"))
     blocks = move_cara_end_exam_to_end(blocks)
+    merge_lab2_task2_invite_images(blocks)
     nav = build_nav_l2(blocks)
     manual: dict[int, list[tuple[str, str]]] = {}
     out = build_html(blocks, manual, nav)
