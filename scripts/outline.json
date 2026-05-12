@@ -13,10 +13,10 @@
   },
   {
     "type": "p",
-    "text": "1. Buka microsoft edge atau chrome (perlu akaun peribadi tak boleh moe), kemudian klik 3 titik(menu) dan pilih New Incognito Window(chrome) /inprivate window(Edge)",
+    "text": "1. Buka microsoft edge atau chrome (perlu akaun peribadi tak boleh MOE), kemudian klik 3 titik(menu) dan pilih New Incognito Window(chrome) /inprivate window(Edge)",
     "runs": [
       {
-        "t": "1. Buka microsoft edge atau chrome (perlu akaun peribadi tak boleh moe), kemudian klik 3 titik(menu) dan pilih New Incognito Window(chrome) /inprivate window(Edge)",
+        "t": "1. Buka microsoft edge atau chrome (perlu akaun peribadi tak boleh MOE), kemudian klik 3 titik(menu) dan pilih New Incognito Window(chrome) /inprivate window(Edge)",
         "b": false,
         "c": null
       }
@@ -63,10 +63,10 @@
   },
   {
     "type": "p",
-    "text": "2. right klik open google drive untuk copy link address",
+    "text": "2. Klik kanan pada Open Google Drive untuk copy link address",
     "runs": [
       {
-        "t": "2. right klik open google drive untuk copy link address",
+        "t": "2. Klik kanan pada Open Google Drive untuk copy link address",
         "b": false,
         "c": null
       }

@@ -36,6 +36,11 @@ TASK_HEAD_RE = re.compile(
 
 # (salin) — ASCII or fullwidth parentheses
 SALIN_MARKER_RE = re.compile(r"（\s*salin\s*）|\(\s*salin\s*\)", re.IGNORECASE)
+# (salin untuk semua kandungan) — copy the following consecutive short paragraphs (slide labels, etc.)
+SALIN_BULK_MARKER_RE = re.compile(
+    r"（\s*salin\s+untuk\s+semua\s+kandungan\s*）|\(\s*salin\s+untuk\s+semua\s+kandungan\s*\)",
+    re.IGNORECASE,
+)
 # Reference-only: (task1a), (gambar task3a), (task2b hingga task2g), etc.
 TASK_REF_PAREN_RE = re.compile(
     r"\([^)]*\b(?:gambar\s+)?task\s*\d+\s*[a-z]?[^)]*\)",
@@ -97,6 +102,71 @@ def _merge_intervals(spans: list[tuple[int, int]]) -> list[tuple[int, int]]:
     return out
 
 
+def _remove_regex_spans_from_runs(runs: list[dict], pattern: re.Pattern[str]) -> list[dict]:
+    """Remove every match of pattern from flattened runs (char-accurate)."""
+    if not runs:
+        return []
+    flat, meta = _run_flat_meta(runs)
+    spans = [m.span() for m in pattern.finditer(flat)]
+    if not spans:
+        return runs
+    merged = _merge_intervals(spans)
+    new_chars: list[tuple[str, bool, str | None]] = []
+    for i, ch in enumerate(flat):
+        if any(s <= i < e for s, e in merged):
+            continue
+        new_chars.append((ch, meta[i][0], meta[i][1]))
+    return _chars_to_runs(new_chars)
+
+
+def _following_bulk_copy_bundle(blocks: list[dict], idx: int) -> tuple[list[str], list[int]]:
+    """Lines after (salin untuk semua kandungan) and their block indices (for skipping duplicate render)."""
+    out_lines: list[str] = []
+    out_ix: list[int] = []
+    j = idx + 1
+    while j < len(blocks):
+        b = blocks[j]
+        if b.get("type") != "p":
+            break
+        t = (b.get("text") or "").strip()
+        if not t:
+            break
+        tl = t.lower()
+        if "(task" in tl:
+            break
+        if "salin untuk semua kandungan" in tl:
+            break
+        if re.match(
+            r"^(Klik|Pilih|Taip|Masukkan|Buka|Tetapkan|Pastikan|Selepas|Kemudian|Seterusnya|Untuk|Dalam|Guna|Ambil)\b",
+            t,
+            re.IGNORECASE,
+        ):
+            break
+        if "[" in t and "]" in t and re.search(r"\[(?:Share|Editor|Send|Add)\b", t, re.IGNORECASE):
+            break
+        if len(t) > 160:
+            break
+        out_lines.append(t)
+        out_ix.append(j)
+        j += 1
+        if len(out_lines) > 40:
+            break
+    return out_lines, out_ix
+
+
+def collect_bulk_salin_skip_indices(blocks: list[dict]) -> set[int]:
+    """Paragraph indices already folded into a preceding (salin untuk semua kandungan) clipboard."""
+    skip: set[int] = set()
+    for i, blk in enumerate(blocks):
+        if blk.get("type") != "p":
+            continue
+        flat0 = "".join(r["t"] for r in (blk.get("runs") or []))
+        if SALIN_BULK_MARKER_RE.search(flat0):
+            _, ix = _following_bulk_copy_bundle(blocks, i)
+            skip.update(ix)
+    return skip
+
+
 def _run_flat_meta(runs: list[dict]) -> tuple[str, list[tuple[bool, str | None]]]:
     chars: list[str] = []
     meta: list[tuple[bool, str | None]] = []
@@ -143,7 +213,9 @@ def _find_salin_copy_text(flat: str, meta: list[tuple[bool, str | None]], m_star
     bold_text = flat[pos + 1 : end_pos + 1].strip()
     if bold_text:
         return bold_text
-    segs = re.split(r"[–\u2013\-:=;>]", head)
+    # Do not split on ":" or ";" — English lines like "Reminder: …" or "A; B; C."
+    # would wrongly keep only the last clause. ">" is handled above.
+    segs = re.split(r"[–\u2013\-=]", head)
     if len(segs) >= 2:
         tail = segs[-1].strip()
         tail = re.sub(r"\s+", " ", tail)
@@ -273,6 +345,17 @@ def lab2_calendar_event_intro_step_badges(imgs: list[str]) -> bool:
     return len(imgs) == 2 and {Path(x).name for x in imgs} == {"image27.png", "image28.png"}
 
 
+def lab2_task2ef_slide_placeholder_figure_order(imgs: list[str]) -> list[str]:
+    """Slides Image placeholder steps: Word order was Rename (2) then menu (1); teach 1 then 2 left-to-right."""
+    if len(imgs) != 2:
+        return imgs
+    names = {Path(x).name for x in imgs}
+    if names != {"image46.png", "image47.png"}:
+        return imgs
+    by_name = {Path(rel).name: rel for rel in imgs}
+    return [by_name["image47.png"], by_name["image46.png"]]
+
+
 def build_nav_l2(blocks: list[dict]) -> list[NavEntry]:
     out: list[NavEntry] = []
     cara_idx: int | None = None
@@ -359,6 +442,10 @@ def merge_adjacent_runs_list(runs: list[dict]) -> list[dict]:
         else:
             out.append(dict(r))
     return out
+
+
+def _norm_ws_one_line(s: str) -> str:
+    return re.sub(r"\s+", " ", (s or "").strip())
 
 
 def slice_runs(runs: list[dict], start: int, end: int) -> list[dict]:
@@ -491,10 +578,31 @@ def wrap_paragraph_block(
     )
 
 
-def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, list[tuple[str, str]]]) -> str:
+def render_block(
+    idx: int,
+    block: dict,
+    blocks: list[dict],
+    anchor_ids: set[str],
+    manual: dict[int, list[tuple[str, str]]],
+    bulk_skip: set[int],
+) -> str:
+    if idx in bulk_skip:
+        return ""
     blk = copy.deepcopy(block)
     runs_in = list(blk.get("runs") or [])
+    flat0 = "".join(r["t"] for r in runs_in)
+    bulk_rows: list[tuple[str, str]] = []
+    if SALIN_BULK_MARKER_RE.search(flat0):
+        bulk_lines, _ = _following_bulk_copy_bundle(blocks, idx)
+        if bulk_lines:
+            bullet = "\u2022 "  # plain-text bullet for paste into slides
+            bulk_rows.append(
+                ("Ayat tampal", "\n".join(f"{bullet}{ln.strip()}" for ln in bulk_lines)),
+            )
+        runs_in = _remove_regex_spans_from_runs(runs_in, SALIN_BULK_MARKER_RE)
+        runs_in = merge_adjacent_runs_list(runs_in)
     runs_proc, salin_rows = extract_salin_and_strip_reference_parens(runs_in)
+    salin_rows = bulk_rows + salin_rows
     blk["runs"] = runs_proc
     blk["text"] = "".join(r["t"] for r in runs_proc).strip()
 
@@ -503,6 +611,7 @@ def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, 
     imgs = cara_end_exam_figure_order(imgs, t)
     imgs, invite_step_badges = lab2_task2_invite_figure_order(imgs)
     imgs = lab2_calendar_event_intro_figure_order(imgs)
+    imgs = lab2_task2ef_slide_placeholder_figure_order(imgs)
     calendar_intro_badges = lab2_calendar_event_intro_step_badges(imgs)
     rows = blk.get("rows")
     bid = f"b-{idx}"
@@ -539,6 +648,13 @@ def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, 
         extras.extend(build_extra_copies_for_block(idx, t, manual))
         copy_rows = "".join(render_copy_row(lbl, val) for lbl, val in extras if val)
 
+        copy_vals = [v for _lb, v in extras if v]
+        skip_dup_body = (
+            kind == "body"
+            and len(copy_vals) == 1
+            and _norm_ws_one_line(t) == _norm_ws_one_line(copy_vals[0])
+        )
+
         loff = len(flat) - len(flat.lstrip())
         hi = loff + len(st) if st else loff
 
@@ -559,16 +675,19 @@ def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, 
         else:
             inner_rich = render_text_with_urls(t.strip())
 
-        inner_parts.append(
-            wrap_paragraph_block(
-                kind,
-                text_for_kind,
-                inner_rich,
-                copy_rows,
-                body_inner=body_inner,
-                task_inner=task_inner,
+        if not skip_dup_body:
+            inner_parts.append(
+                wrap_paragraph_block(
+                    kind,
+                    text_for_kind,
+                    inner_rich,
+                    copy_rows,
+                    body_inner=body_inner,
+                    task_inner=task_inner,
+                )
             )
-        )
+        elif copy_rows:
+            inner_parts.append(f'<div class="not-prose mb-3.5 last:mb-0">{copy_rows}</div>')
 
     if imgs:
         fig_inner: list[str] = []
@@ -596,10 +715,6 @@ def render_block(idx: int, block: dict, anchor_ids: set[str], manual: dict[int, 
             )
         if len(fig_inner) == 1:
             inner_parts.append(f'<div class="not-prose my-6 lg:mx-auto lg:max-w-[42rem]">{fig_inner[0]}</div>')
-        elif invite_step_badges:
-            inner_parts.append(
-                '<div class="not-prose my-6 flex flex-col gap-4 lg:mx-auto lg:max-w-[42rem]">' + "".join(fig_inner) + "</div>"
-            )
         else:
             inner_parts.append(
                 '<div class="not-prose my-6 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:mx-auto lg:max-w-5xl lg:gap-6">'
@@ -686,6 +801,7 @@ def _lab_section_shell_open(li: int, aria: str) -> str:
 
 def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]], nav: list[NavEntry]) -> str:
     anchor_ids = collect_anchor_ids(nav)
+    bulk_skip = collect_bulk_salin_skip_indices(blocks)
     nav_html = render_nav_html(nav)
 
     lab_starts: list[int] = []
@@ -707,7 +823,7 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]], nav
             'bg-white p-6 shadow-sm sm:p-8">'
         )
         for i in range(len(blocks)):
-            ch = render_block(i, blocks[i], anchor_ids, manual)
+            ch = render_block(i, blocks[i], blocks, anchor_ids, manual, bulk_skip)
             if ch:
                 body_chunks.append(ch)
         body_chunks.append("</div>")
@@ -721,7 +837,7 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]], nav
             short = re.sub(r"^GCE\s+LEVEL\s+2\s*[–-]\s*", "", title, flags=re.IGNORECASE).strip() or title
             body_chunks.append(_lab_section_shell_open(li, short))
             for i in range(start, end):
-                ch = render_block(i, blocks[i], anchor_ids, manual)
+                ch = render_block(i, blocks[i], blocks, anchor_ids, manual, bulk_skip)
                 if ch:
                     body_chunks.append(ch)
             body_chunks.append("</section>")
@@ -733,7 +849,7 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]], nav
                 '<span class="h-1.5 w-1.5 rounded-full bg-slate-400"></span>Tamat peperiksaan</header>'
             )
             for i in range(cara_start, len(blocks)):
-                ch = render_block(i, blocks[i], anchor_ids, manual)
+                ch = render_block(i, blocks[i], blocks, anchor_ids, manual, bulk_skip)
                 if ch:
                     body_chunks.append(ch)
             body_chunks.append("</section>")

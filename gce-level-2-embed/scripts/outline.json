@@ -250,10 +250,10 @@
   },
   {
     "type": "p",
-    "text": "Kembali  ke tab drive(rujuk gambar task2a), buka google sheet 5th Grade list",
+    "text": "Kembali ke tab drive(rujuk gambar task2a), buka google sheet 5th Grade list",
     "runs": [
       {
-        "t": "Kembali  ke tab drive(rujuk gambar task2a), buka google sheet 5th Grade list",
+        "t": "Kembali ke tab drive(rujuk gambar task2a), buka google sheet 5th Grade list",
         "b": false,
         "c": null
       }
@@ -466,6 +466,30 @@
   },
   {
     "type": "p",
+    "text": "Term 1 (salin)",
+    "runs": [
+      {
+        "t": "Term 1 (salin)",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Term 2 (salin)",
+    "runs": [
+      {
+        "t": "Term 2 (salin)",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
     "text": "",
     "runs": [
       {
@@ -475,8 +499,8 @@
       }
     ],
     "images": [
-      "media/image11.png",
-      "media/image12.png"
+      "media/image12.png",
+      "media/image11.png"
     ]
   },
   {
@@ -660,7 +684,70 @@
       }
     ],
     "images": [
-      "media/image15.png",
+      "media/image15.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Selepas fail disambungkan, Tukar markah pada [Points] daripada 100 kepada 10 > Klik pada [Topic], pilih Term 1 > Tetapkan [Due] pada minggu hadapan (tambah 7 hari) > Klik [Assign]. (gambar task4h)",
+    "runs": [
+      {
+        "t": "Selepas fail disambungkan, Tukar markah pada [",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Points",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": "] daripada 100 kepada 10 > Klik pada [",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Topic",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": "], pilih ",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Term 1",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": " > Tetapkan [",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Due",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": "] pada minggu hadapan (tambah 7 hari) > Klik [",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Assign",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": "]. (gambar task4h)",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
       "media/image16.png"
     ]
   },
@@ -966,10 +1053,10 @@
   },
   {
     "type": "p",
-    "text": "Selepas link google meet degenerate, pilih 3  titik sebelah kanan [Meet]",
+    "text": "Selepas link google meet digenerate, pilih 3  titik sebelah kanan [Meet]",
     "runs": [
       {
-        "t": "Selepas link google meet degenerate, pilih 3  titik sebelah kanan [",
+        "t": "Selepas link google meet digenerate, pilih 3  titik sebelah kanan [",
         "b": false,
         "c": null
       },
@@ -2811,7 +2898,7 @@
   },
   {
     "type": "p",
-    "text": "Klik [Share] rujuk gambar di bawah. Salin alamat emel teacher 1, teacher 2 dan teacher 3 dari laman web soalan. Tampalkan 3 emel itu di ruang add people rujuk gambar di bawah. Pastikan peranan [Editor] dipilih. Klik [Send] (task2c)",
+    "text": "Klik [Share] rujuk gambar di bawah. Salin alamat emel Teacher 1, Teacher 2 dan Teacher 3 dari laman web soalan. Tampalkan 3 emel itu di ruang add people rujuk gambar di bawah. Pastikan peranan [Editor] dipilih. Klik [Send] (task2c)",
     "runs": [
       {
         "t": "\nKlik [",
@@ -2824,7 +2911,7 @@
         "c": null
       },
       {
-        "t": "] rujuk gambar di bawah. Salin alamat emel teacher 1, teacher 2 dan teacher 3 dari laman web soalan. Tampalkan 3 emel itu di ruang add people rujuk gambar di bawah. Pastikan peranan [",
+        "t": "] rujuk gambar di bawah. Salin alamat emel Teacher 1, Teacher 2 dan Teacher 3 dari laman web soalan. Tampalkan 3 emel itu di ruang add people rujuk gambar di bawah. Pastikan peranan [",
         "b": false,
         "c": null
       },
@@ -3615,10 +3702,10 @@
   },
   {
     "type": "p",
-    "text": "Salin alamat emel Teacher 1 dari laman web soalan. Tampalkan alamat emel itu di ruang comment. Tambah “@” pada depan alamat emel untuk assign kepada Teacher 1 rujuk gambar di bawah. (task3f)",
+    "text": "Salin alamat emel Teacher 1 dari laman web soalan. Tampal emel tersebut dalam ruang komen. Tambah simbol \"@\" di hadapan alamat emel supaya Teacher 1 di-assign (rujuk gambar di bawah). (task3f)",
     "runs": [
       {
-        "t": "Salin alamat emel Teacher 1 dari laman web soalan. Tampalkan alamat emel itu di ruang comment. Tambah “@” pada depan alamat emel untuk assign kepada Teacher 1 rujuk gambar di bawah. (task3f)",
+        "t": "Salin alamat emel Teacher 1 dari laman web soalan. Tampal emel tersebut dalam ruang komen. Tambah simbol \"@\" di hadapan alamat emel supaya Teacher 1 di-assign (rujuk gambar di bawah). (task3f)",
         "b": false,
         "c": null
       }
@@ -3639,10 +3726,10 @@
   },
   {
     "type": "p",
-    "text": "Slaid Schedule & Classroom Expectations assign kepada Teacher 1",
+    "text": "Slaid \"Schedule\" dan slaid \"Classroom Expectations\" → assign kepada Teacher 1",
     "runs": [
       {
-        "t": "Slaid Schedule & Classroom Expectations assign kepada Teacher 1",
+        "t": "Slaid \"Schedule\" dan slaid \"Classroom Expectations\" → assign kepada Teacher 1",
         "b": false,
         "c": null
       }
@@ -3651,10 +3738,10 @@
   },
   {
     "type": "p",
-    "text": "Slaid Field Trips & Academic Support assign kepada Teacher 2",
+    "text": "Slaid \"Field Trips\" dan slaid \"Academic Support\" → assign kepada Teacher 2",
     "runs": [
       {
-        "t": "Slaid Field Trips & Academic Support assign kepada Teacher 2",
+        "t": "Slaid \"Field Trips\" dan slaid \"Academic Support\" → assign kepada Teacher 2",
         "b": false,
         "c": null
       }
@@ -3663,10 +3750,10 @@
   },
   {
     "type": "p",
-    "text": "Slaid Important Documents assign kepada Teacher 3",
+    "text": "Slaid \"Important Documents\" → assign kepada Teacher 3",
     "runs": [
       {
-        "t": "Slaid Important Documents assign kepada Teacher 3",
+        "t": "Slaid \"Important Documents\" → assign kepada Teacher 3",
         "b": false,
         "c": null
       }
@@ -3730,8 +3817,7 @@
       }
     ],
     "images": [
-      "media/image56.png",
-      "media/image57.png"
+      "media/image56.png"
     ]
   },
   {
@@ -3812,7 +3898,9 @@
         "c": null
       }
     ],
-    "images": []
+    "images": [
+      "media/image57.png"
+    ]
   },
   {
     "type": "p",
@@ -4032,6 +4120,18 @@
     "runs": [
       {
         "t": "Terima semua pop up.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Semak kelulusan semua task di laman web soalan dan end lab.",
+    "runs": [
+      {
+        "t": "Semak kelulusan semua task di laman web soalan dan end lab.",
         "b": false,
         "c": null
       }
