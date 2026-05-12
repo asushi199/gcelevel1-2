@@ -811,9 +811,9 @@ def render_nav_html() -> str:
 
 
 def render_cara_end_exam_footer_html() -> str:
-    """Same instructions as Level 2 doc: image62 (breadcrumb) first, image61 (End Exam) second."""
-    img_a = "../gce-level-2-embed/media/image62.png"
-    img_b = "../gce-level-2-embed/media/image61.png"
+    """Same instructions as Level 2; images copied under L1 media/ (62 first, 61 second)."""
+    img_a = "media/image62.png"
+    img_b = "media/image61.png"
     p1 = "Di laman web soalan klik link ikut gambar di bawah."
     p2 = "Scroll ke bawah, klik butang [End Exam]"
 
