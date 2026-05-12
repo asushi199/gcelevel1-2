@@ -939,7 +939,7 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
   <dialog id="img-lightbox" class="z-[200] m-0 h-[100dvh] w-full max-w-none border-0 bg-slate-950 p-0 text-white outline-none [&::backdrop]:bg-black/70 [&::backdrop]:backdrop-blur-sm" aria-label="Gambar diperbesar">
     <div class="flex h-full min-h-0 flex-col">
       <div class="flex shrink-0 flex-col gap-2 border-b border-white/10 px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
-        <span class="max-w-[min(100%,20rem)] text-xs font-medium leading-snug opacity-90 sm:max-w-none">Cubit jari (pinch) atau butang +/− untuk zum. Klik kawasan kosong, Tutup, atau Esc untuk keluar.</span>
+        <span class="max-w-[min(100%,20rem)] text-xs font-medium leading-snug opacity-90 sm:max-w-none">Cubit jari (pinch) atau butang +/− untuk zum. Bila dizum, seret satu jari pada gambar untuk gerak. Pada komputer: klik kiri pada gambar lalu seret (drag). Klik kawasan kosong, Tutup, atau Esc untuk keluar.</span>
         <div class="flex flex-wrap items-center justify-end gap-2">
           <div class="flex items-center gap-1 rounded-lg bg-white/10 p-1" role="group" aria-label="Zoom gambar">
             <button type="button" id="img-lb-zoom-out" class="min-h-[44px] min-w-[44px] rounded-md text-xl font-bold leading-none text-white hover:bg-white/15 active:bg-white/25">−</button>
@@ -951,8 +951,8 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
           </form>
         </div>
       </div>
-      <div id="img-lightbox-body" class="relative flex min-h-0 flex-1 overflow-auto overscroll-contain p-3" style="touch-action: pan-x pan-y pinch-zoom;">
-        <div id="img-lb-zoom-wrap" class="m-auto flex min-h-min min-w-min items-center justify-center p-2 will-change-transform" style="transform: scale(1); transform-origin: center center;">
+      <div id="img-lightbox-body" class="relative flex min-h-0 flex-1 overflow-hidden overscroll-none p-3" style="touch-action: none;">
+        <div id="img-lb-zoom-wrap" class="m-auto flex min-h-min min-w-min touch-none items-center justify-center p-2 will-change-transform" style="transform: translate(0px, 0px) scale(1); transform-origin: center center;">
           <img id="img-lightbox-img" src="" alt="" class="max-h-[min(86dvh,1100px)] w-auto max-w-[min(100vw,1100px)] object-contain select-none" draggable="false">
         </div>
       </div>
@@ -1031,29 +1031,86 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
     var imgLbZoomOut = document.getElementById("img-lb-zoom-out");
     var imgLbZoomReset = document.getElementById("img-lb-zoom-reset");
     var lbScale = 1;
+    var lbTx = 0;
+    var lbTy = 0;
     var LB_MIN = 0.35;
     var LB_MAX = 5;
     var pinchStartDist = 0;
     var pinchStartScale = 1;
+    var panArmed = false;
+    var panStartX = 0;
+    var panStartY = 0;
+    var panStartTx = 0;
+    var panStartTy = 0;
+    var mousePan = false;
+    var mouseStartX = 0;
+    var mouseStartY = 0;
+    var mouseStartTx = 0;
+    var mouseStartTy = 0;
     function lbClamp(s) {{
       return Math.max(LB_MIN, Math.min(LB_MAX, s));
+    }}
+    function lbClampPan() {{
+      if (!imgLbBody || !imgLbImg) return;
+      var vw = imgLbBody.clientWidth;
+      var vh = imgLbBody.clientHeight;
+      var iw = imgLbImg.offsetWidth * lbScale;
+      var ih = imgLbImg.offsetHeight * lbScale;
+      var pad = 32;
+      var maxX = Math.max(0, (iw - vw) / 2 + pad);
+      var maxY = Math.max(0, (ih - vh) / 2 + pad);
+      lbTx = Math.max(-maxX, Math.min(maxX, lbTx));
+      lbTy = Math.max(-maxY, Math.min(maxY, lbTy));
     }}
     function lbApplyScale() {{
       if (!imgLbWrap) return;
       lbScale = lbClamp(lbScale);
-      imgLbWrap.style.transform = "scale(" + lbScale + ")";
+      if (lbScale <= 1.02) {{
+        lbTx = 0;
+        lbTy = 0;
+      }}
+      lbClampPan();
+      imgLbWrap.style.transform = "translate(" + lbTx + "px, " + lbTy + "px) scale(" + lbScale + ")";
       imgLbWrap.style.transformOrigin = "center center";
       if (imgLbZoomReset) imgLbZoomReset.textContent = Math.round(lbScale * 100) + "%";
+      if (imgLbWrap)
+        imgLbWrap.style.cursor = mousePan ? "grabbing" : lbScale > 1.02 ? "grab" : "";
+    }}
+    function lbEndMousePan() {{
+      if (!mousePan) return;
+      mousePan = false;
+      document.removeEventListener("mousemove", lbMousePanMove);
+      document.removeEventListener("mouseup", lbMousePanUp);
+      if (imgLbWrap) imgLbWrap.style.cursor = lbScale > 1.02 ? "grab" : "";
+    }}
+    function lbMousePanMove(e) {{
+      if (!mousePan || !imgLb || !imgLb.open) return;
+      e.preventDefault();
+      lbTx = mouseStartTx + (e.clientX - mouseStartX);
+      lbTy = mouseStartTy + (e.clientY - mouseStartY);
+      lbClampPan();
+      lbApplyScale();
+    }}
+    function lbMousePanUp() {{
+      lbEndMousePan();
     }}
     function lbResetZoom() {{
       lbScale = 1;
+      lbTx = 0;
+      lbTy = 0;
       pinchStartDist = 0;
+      panArmed = false;
+      lbEndMousePan();
       lbApplyScale();
     }}
     function openImgLightbox(src) {{
       if (!imgLb || !imgLbImg || !src) return;
       lbResetZoom();
       imgLbImg.src = src;
+      imgLbImg.onload = function () {{
+        lbClampPan();
+        lbApplyScale();
+      }};
       imgLb.showModal();
     }}
     function closeImgLightbox() {{
@@ -1090,8 +1147,15 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
       imgLbBody.addEventListener("touchstart", function (e) {{
         if (!imgLb || !imgLb.open) return;
         if (e.touches.length === 2) {{
+          panArmed = false;
           pinchStartDist = lbTouchDist(e.touches[0], e.touches[1]);
           pinchStartScale = lbScale;
+        }} else if (e.touches.length === 1 && lbScale > 1.02 && (e.target === imgLbImg || e.target === imgLbWrap)) {{
+          panArmed = true;
+          panStartX = e.touches[0].clientX;
+          panStartY = e.touches[0].clientY;
+          panStartTx = lbTx;
+          panStartTy = lbTy;
         }}
       }}, {{ passive: true }});
       imgLbBody.addEventListener("touchmove", function (e) {{
@@ -1100,11 +1164,20 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
           e.preventDefault();
           var d = lbTouchDist(e.touches[0], e.touches[1]);
           lbScale = lbClamp(pinchStartScale * (d / pinchStartDist));
+          lbClampPan();
+          lbApplyScale();
+        }} else if (e.touches.length === 1 && panArmed && pinchStartDist === 0 && lbScale > 1.02) {{
+          e.preventDefault();
+          var t = e.touches[0];
+          lbTx = panStartTx + (t.clientX - panStartX);
+          lbTy = panStartTy + (t.clientY - panStartY);
+          lbClampPan();
           lbApplyScale();
         }}
       }}, {{ passive: false }});
       imgLbBody.addEventListener("touchend", function (e) {{
         if (!e.touches || e.touches.length < 2) pinchStartDist = 0;
+        if (!e.touches || e.touches.length === 0) panArmed = false;
       }}, {{ passive: true }});
       imgLbBody.addEventListener("wheel", function (e) {{
         if (!imgLb || !imgLb.open) return;
@@ -1114,6 +1187,22 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
           lbApplyScale();
         }}
       }}, {{ passive: false }});
+    }}
+    if (imgLbWrap) {{
+      imgLbWrap.addEventListener("mousedown", function (e) {{
+        if (!imgLb || !imgLb.open || e.button !== 0) return;
+        if (lbScale <= 1.02) return;
+        if (e.target !== imgLbImg && e.target !== imgLbWrap) return;
+        e.preventDefault();
+        mousePan = true;
+        mouseStartX = e.clientX;
+        mouseStartY = e.clientY;
+        mouseStartTx = lbTx;
+        mouseStartTy = lbTy;
+        imgLbWrap.style.cursor = "grabbing";
+        document.addEventListener("mousemove", lbMousePanMove);
+        document.addEventListener("mouseup", lbMousePanUp);
+      }});
     }}
     if (imgLb) {{
       imgLb.addEventListener("close", function () {{
