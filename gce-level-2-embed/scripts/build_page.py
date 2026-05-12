@@ -122,6 +122,18 @@ def _chars_to_runs(chars: list[tuple[str, bool, str | None]]) -> list[dict]:
 
 
 def _find_salin_copy_text(flat: str, meta: list[tuple[bool, str | None]], m_start: int) -> str:
+    head = flat[:m_start]
+
+    # "… [Add location] > 123 Main Street (salin)" — copy only the part after the last ">"
+    if ">" in head:
+        after_gt = head.rsplit(">", 1)[-1].strip()
+        after_gt = re.sub(r"\s+", " ", after_gt)
+        after_gt = TASK_REF_PAREN_RE.sub("", after_gt)
+        after_gt = PICTURE_REF_PAREN_RE.sub("", after_gt)
+        after_gt = SALIN_MARKER_RE.sub("", after_gt).strip()
+        if after_gt and len(after_gt) < 200:
+            return after_gt
+
     pos = m_start - 1
     while pos >= 0 and flat[pos] in " \t\n\u00a0":
         pos -= 1
@@ -131,8 +143,7 @@ def _find_salin_copy_text(flat: str, meta: list[tuple[bool, str | None]], m_star
     bold_text = flat[pos + 1 : end_pos + 1].strip()
     if bold_text:
         return bold_text
-    head = flat[:m_start]
-    segs = re.split(r"[–\u2013\-:=;]", head)
+    segs = re.split(r"[–\u2013\-:=;>]", head)
     if len(segs) >= 2:
         tail = segs[-1].strip()
         tail = re.sub(r"\s+", " ", tail)
