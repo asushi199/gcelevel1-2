@@ -1,0 +1,3482 @@
+[
+  {
+    "type": "p",
+    "text": "Cara untuk masuk ke Lab Drive",
+    "runs": [
+      {
+        "t": "Cara untuk masuk ke Lab Drive",
+        "b": true,
+        "c": "156082"
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "1. Buka microsoft edge atau chrome (perlu akaun peribadi tak boleh moe), kemudian klik 3 titik(menu) dan pilih New Incognito Window(chrome) /inprivate window(Edge)",
+    "runs": [
+      {
+        "t": "1. Buka microsoft edge atau chrome (perlu akaun peribadi tak boleh moe), kemudian klik 3 titik(menu) dan pilih New Incognito Window(chrome) /inprivate window(Edge)",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image1.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "2. right klik open google drive untuk copy link address",
+    "runs": [
+      {
+        "t": "2. right klik open google drive untuk copy link address",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image2.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "3. Paste link address yang dapat pada address bar dan enter.",
+    "runs": [
+      {
+        "t": "3. Paste link address yang dapat pada address bar dan enter.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image3.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Setiap lab exam kena ulang langkah yang sama untuk masuk ke lab untuk ambik exam.",
+    "runs": [
+      {
+        "t": "Setiap lab exam kena ulang langkah yang sama untuk masuk ke lab untuk ambik exam.",
+        "b": true,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": true,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Bahagian Kuiz GCE LEVEL 1 & 2",
+    "runs": [
+      {
+        "t": "Bahagian Kuiz GCE LEVEL 1 & 2",
+        "b": true,
+        "c": "156082"
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "GCE LEVEL 1 & 2 masing-masing ada bahagian kuiz. Copy semua soalan lepas tu paste kepada gemini. Bagi arahan “bagi jawapan tanpa penerangan”.\njawapan akan bagi seperti gambar dibawah. Ikut jawapan yang diberi untuk menjawab.",
+    "runs": [
+      {
+        "t": "GCE LEVEL 1 & 2 masing-masing ada bahagian kuiz. Copy semua soalan lepas tu paste kepada gemini. Bagi arahan “bagi jawapan tanpa penerangan”.\njawapan akan bagi seperti gambar dibawah. Ikut jawapan yang diberi untuk menjawab.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image4.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\t",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "LAB 1 GCE LEVEL 1 – Google Classroom",
+    "runs": [
+      {
+        "t": "LAB 1 GCE LEVEL 1 – Google Classroom",
+        "b": true,
+        "c": "156082"
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Selepas masuk Lab Drive dengan cara di atas. Buka GC ikut cara dalam gambar.",
+    "runs": [
+      {
+        "t": "Selepas masuk Lab Drive dengan cara di atas. Buka GC ikut cara dalam gambar.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image5.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Ambil perhatian semasa log in ke GC. Tengok baik-baik gambar dan pilih.",
+    "runs": [
+      {
+        "t": "Ambil perhatian semasa log in ke GC. Tengok baik-baik gambar dan pilih.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image6.png",
+      "media/image7.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\t",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Selepas log in GC, Klik tambah dan create class",
+    "runs": [
+      {
+        "t": "Selepas log in GC, Klik tambah dan create class",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image8.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Namakan Class sebagai: Geography.",
+    "runs": [
+      {
+        "t": "Namakan Class sebagai: ",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Geography",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": ". ",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Tips: boleh copy je dari laman web soalan.",
+    "runs": [
+      {
+        "t": "Tips: ",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "boleh copy je dari laman web soalan.",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": " ",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image9.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Peringatan yang sangat sangat penting: Semak baik-baik huruf besar/kecil, spacing dan tanda titik yang berlebihan. Semua ini akan menyebabkan kegagalan semasa Semak kelulusan nanti.",
+    "runs": [
+      {
+        "t": "Peringatan yang sangat sangat penting: Semak baik-baik huruf besar/kecil, spacing dan tanda titik yang berlebihan. Semua ini akan menyebabkan kegagalan semasa Semak kelulusan nanti.",
+        "b": true,
+        "c": "EE0000"
+      },
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Selepas bina kelas, pilih tab",
+    "runs": [
+      {
+        "t": "Selepas bina kelas, pilih tab",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "[Classwork] > [Create] > [Assignment].",
+    "runs": [
+      {
+        "t": " [",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Classwork",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": "] > [",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Create",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": "] > [",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Assignment",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": "].",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image10.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Namakan assignment sebagai:",
+    "runs": [
+      {
+        "t": "Namakan assignment sebagai:",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Capital Cities",
+    "runs": [
+      {
+        "t": "Capital Cities",
+        "b": true,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Pada bahagian instructions masukkan ayat:",
+    "runs": [
+      {
+        "t": "Pada bahagian instructions masukkan ayat:",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Watch the video and write a short document about the place where you live.",
+    "runs": [
+      {
+        "t": "Watch the video and write a short document about the place where you live.",
+        "b": true,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image11.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Klik ikon drive yang berada di bawah untuk masukkan 2 fail. 1 Video 1 Google doc. Selepas add fail google doc, pilih “make a copy for each student” di sebelah kanan.",
+    "runs": [
+      {
+        "t": "Klik ikon drive yang berada di bawah untuk masukkan 2 fail. 1 Video 1 Google doc. Selepas add fail google doc, ",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "pilih “make a copy for each student” di sebelah kanan",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": ".\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image12.png",
+      "media/image13.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image14.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image15.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Pada menu sebelah kanan, klik [Topic]>[Create topic]. Masukkan Topic:",
+    "runs": [
+      {
+        "t": "Pada menu sebelah kanan, klik [",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Topic",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": "]>[",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Create topic",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": "]. Masukkan Topic:",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image16.png",
+      "media/image17.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Cities",
+    "runs": [
+      {
+        "t": "Cities",
+        "b": true,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\t",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Klik bahagian Due untuk set Tarikh. Pilih tarikh hari keesokan sebagai due date (Contoh: jika hari ini 13 Mei, pilih 14 Mei).",
+    "runs": [
+      {
+        "t": "Klik ",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "bahagian Due",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": " untuk set Tarikh. Pilih tarikh hari keesokan sebagai due date (Contoh: jika hari ini 13 Mei, pilih 14 Mei).",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image18.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image19.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\t",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Klik Assign  selepas semua setting sudah buat.",
+    "runs": [
+      {
+        "t": "Klik ",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Assign",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": "  selepas semua setting sudah buat.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image20.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Task terakhir untuk lab pertama, klik tab [Stream]> [New announcement]",
+    "runs": [
+      {
+        "t": "Task terakhir untuk lab pertama, klik tab [",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Stream",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": "]> [",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "New announcement",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": "]",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image21.png",
+      "media/image22.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Pada ruang announcement masukkan ayat:",
+    "runs": [
+      {
+        "t": "Pada ruang announcement masukkan ayat:",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Reminder: The Capital Cities assignment is due tomorrow.",
+    "runs": [
+      {
+        "t": "Reminder: The Capital Cities assignment is due tomorrow.",
+        "b": true,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Klik [Post].",
+    "runs": [
+      {
+        "t": "Klik [",
+        "b": false,
+        "c": null
+      },
+      {
+        "t": "Post",
+        "b": true,
+        "c": null
+      },
+      {
+        "t": "].",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Balik ke laman web soalan. Check semua task 1-5.",
+    "runs": [
+      {
+        "t": "Balik ke laman web soalan. Check semua task 1-5.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image23.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Pastikan semua markah sudah dapat. Selepas itu, klik end lab untuk habiskan exam lab 1.",
+    "runs": [
+      {
+        "t": "Pastikan semua markah sudah dapat. Selepas itu, klik end lab untuk habiskan exam lab 1.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image24.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\t",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "LAB 2 GCE LEVEL 1 – Google Doc",
+    "runs": [
+      {
+        "t": "LAB 2 GCE LEVEL 1 – Google Doc",
+        "b": true,
+        "c": "156082"
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Guna cara yang sama seperti di atas untuk masuk ke drive lab 2.",
+    "runs": [
+      {
+        "t": "Guna cara yang sama seperti di atas untuk masuk ke drive lab 2.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image25.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Task 1: Klik butang +new > google docs",
+    "runs": [
+      {
+        "t": "Task 1: Klik butang +new > google docs",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image26.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\t",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Ikut gambar, masukkan tajuk - Supply List",
+    "runs": [
+      {
+        "t": "Ikut gambar, masukkan tajuk - Supply List",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "dan kandungan ayat - The supplies needed for the project are the following: tape, scissors, pens, pencils, and paper.",
+    "runs": [
+      {
+        "t": "dan kandungan ayat - The supplies needed for the project are the following: tape, scissors, pens, pencils, and paper.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image27.png",
+      "media/image28.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Task 2: klik share di sebelah kanan atas.",
+    "runs": [
+      {
+        "t": "Task 2: klik share di sebelah kanan atas.\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Ikut gambar, copy dan paste emel yang diberi dalam laman web soalan. Tukar pilihan di sebelah kanan kepada commenter lalu klik send.",
+    "runs": [
+      {
+        "t": "Ikut gambar, copy dan paste emel yang diberi dalam laman web soalan. Tukar pilihan di sebelah kanan kepada commenter lalu klik send.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image29.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Task 3: Klik sekali lagi share, klik pada icon gigi roda. Ikut setting yang tunjuk pada gambar di bawah.",
+    "runs": [
+      {
+        "t": "Task 3: Klik sekali lagi share, klik pada icon gigi roda. Ikut setting yang tunjuk pada gambar di bawah.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image30.png",
+      "media/image31.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Task 4: highlight “pens” lalu klik add comment (short cut key ctrl+alt+M), paste ayat: Get red pens (pada ruangan yang pop up) lalu klik comment.",
+    "runs": [
+      {
+        "t": "Task 4: highlight “pens” lalu klik add comment (short cut key ctrl+alt+M), paste ayat: Get red pens (pada ruangan yang pop up) lalu klik comment.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image32.png",
+      "media/image33.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "highlight pencils, klik add comment, pada ruangan yang pop up paste ayat dari laman web soalan. Kemudian tick assign to xxxxx dan assign.",
+    "runs": [
+      {
+        "t": "highlight pencils, klik add comment, pada ruangan yang pop up paste ayat dari laman web soalan. Kemudian tick assign to xxxxx dan assign.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image34.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\t",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "TASK 5: balik ke tab drive yang mula-mula buka, klik”+new”>klik new folder. Pada kotak yang pop up namakan folder – Supply List Committee lalu klik create.",
+    "runs": [
+      {
+        "t": "TASK 5: balik ke tab drive yang mula-mula buka, klik”+new”>klik new folder. Pada kotak yang pop up namakan folder – Supply List Committee lalu klik create.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image35.png",
+      "media/image36.png",
+      "media/image37.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Tarik fail Supply List ke dalam folder yang create tadi.",
+    "runs": [
+      {
+        "t": "Tarik fail Supply List ke dalam folder yang create tadi.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Jika tidak dapat drag, ikut langkah yang tunjuk pada gambar.",
+    "runs": [
+      {
+        "t": "Jika tidak dapat drag, ikut langkah yang tunjuk pada gambar.\t",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image38.png",
+      "media/image39.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Semak kelulusan seperti lab pertama. Pastikan markah telah penuh sebelum end lab.",
+    "runs": [
+      {
+        "t": "Semak kelulusan seperti lab pertama. Pastikan markah telah penuh sebelum end lab.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "LAB 3 GCE LEVEL 1 – Google Form",
+    "runs": [
+      {
+        "t": "LAB 3 GCE LEVEL 1 – Google Form",
+        "b": true,
+        "c": "156082"
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Guna cara yang sama seperti di atas untuk masuk ke drive lab 3.",
+    "runs": [
+      {
+        "t": "Guna cara yang sama seperti di atas untuk masuk ke drive lab 3.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Task 1: Klik “+new” > klik google forms. Tukar tajuk google form kepada – Our Solar System (rujuk gambar). Pada ruang soalan 1 masukkan – Student Name (pilih jenis soalan short answer.)",
+    "runs": [
+      {
+        "t": "Task 1: Klik “+new” > klik google forms. Tukar tajuk google form kepada – Our Solar System (rujuk gambar). Pada ruang soalan 1 masukkan – Student Name (pilih jenis soalan short answer.)",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image40.png",
+      "media/image41.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Task 2: klik butang add image> klik google drive>klik gambar>klik insert. Namakan ruangan ini – Solar System",
+    "runs": [
+      {
+        "t": "Task 2: klik butang add image> klik google drive>klik gambar>klik insert. Namakan ruangan ini – Solar System\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image42.png",
+      "media/image43.png",
+      "media/image44.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "klik add question. Paste ayat – How many moons does Mercury have? Pilih jenis soalan short answer.",
+    "runs": [
+      {
+        "t": "klik add question. Paste ayat – How many moons does Mercury have? Pilih jenis soalan short answer.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image45.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Klik add question lagi. Paste ayat – What is the third planet from the sun? pilih jenis soalan Multiple choice. Type pilihan jawapan seperti gambar di bawah. Mercury  Venus  Earth  Mars",
+    "runs": [
+      {
+        "t": "Klik add question lagi. Paste ayat – What is the third planet from the sun? pilih jenis soalan Multiple choice. Type pilihan jawapan seperti gambar di bawah. Mercury  Venus  Earth  Mars",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image46.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Klik add question. Paste ayat – Which is the largest planet?",
+    "runs": [
+      {
+        "t": "Klik add question. Paste ayat – Which is the largest planet?",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Pilih jenis soalan Dropdown. Pilihan jawapan seperti gambar di bawah. Jupiter  Saturn  Uranus  Neptune",
+    "runs": [
+      {
+        "t": "Pilih jenis soalan Dropdown. Pilihan jawapan seperti gambar di bawah. Jupiter  Saturn  Uranus  Neptune",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image47.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Klik add question. Paste ayat – What is your favorite planet and why? Pilih jenis soalan paragraph.",
+    "runs": [
+      {
+        "t": "Klik add question. Paste ayat – What is your favorite planet and why? Pilih jenis soalan paragraph.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image48.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Task 3: selepas set semua soalan. Klik setting >enable make this a quiz.",
+    "runs": [
+      {
+        "t": "Task 3: selepas set semua soalan. Klik setting >enable make this a quiz.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image49.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Klik balik soalan ini lalu klik answer key (ulang langkah ini untuk soalan yang berikut.) Selepas klik answer key masukkan jawapan 0 dan klik done.",
+    "runs": [
+      {
+        "t": "Klik balik soalan ini lalu klik answer key (ulang langkah ini untuk soalan yang berikut.) Selepas klik answer key masukkan jawapan 0 dan klik done.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": [
+      "media/image50.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image51.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Klik balik soalan ini lalu klik answer key (ulang langkah ini untuk soalan yang berikut.) Selepas klik answer key klik earth sebagai jawapan dan klik done.",
+    "runs": [
+      {
+        "t": "Klik balik soalan ini lalu klik answer key (ulang langkah ini untuk soalan yang berikut.) Selepas klik answer key klik earth sebagai jawapan dan klik done.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image52.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Klik balik soalan ini lalu klik answer key (ulang langkah ini untuk soalan yang berikut.) Selepas klik answer key klik Jupiter sebagai jawapan dan klik done.",
+    "runs": [
+      {
+        "t": "Klik balik soalan ini lalu klik answer key (ulang langkah ini untuk soalan yang berikut.) Selepas klik answer key klik Jupiter sebagai jawapan dan klik done.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image53.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Task 4 = bonus (tidak perlu buat)",
+    "runs": [
+      {
+        "t": "Task 4 = bonus (tidak perlu buat)",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Task 5 klik add people pada sebelah kanan atas",
+    "runs": [
+      {
+        "t": "Task 5 klik add people pada sebelah kanan atas",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Masukkan 2 emel yang diberi pada ruang add people seterusya tukar peranan kepada editor pada ruangan di sebelah kanan lalu klik send.",
+    "runs": [
+      {
+        "t": "Masukkan 2 emel yang diberi pada ruang add people seterusya tukar peranan kepada editor pada ruangan di sebelah kanan lalu klik send.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image54.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [
+      {
+        "t": "\n",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Selepas add people, klik Responses dan klik link to sheets. Klik create pada kotak yang pop up.",
+    "runs": [
+      {
+        "t": "Selepas add people, klik Responses dan klik link to sheets. Klik create pada kotak yang pop up.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image55.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": [
+      "media/image56.png"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Semak kelulusan seperti lab sebelumnya. Pastikan markah telah penuh sebelum end lab.",
+    "runs": [
+      {
+        "t": "Semak kelulusan seperti lab sebelumnya. Pastikan markah telah penuh sebelum end lab.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "",
+    "runs": [],
+    "images": []
+  },
+  {
+    "type": "p",
+    "text": "Tahniah GCE level 1 done.",
+    "runs": [
+      {
+        "t": "Tahniah GCE level 1 done.",
+        "b": false,
+        "c": null
+      }
+    ],
+    "images": []
+  }
+]
