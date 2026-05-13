@@ -866,7 +866,7 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]], nav
   <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
     <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
       <div class="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
-        <a href="../levels.html" class="shrink-0 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50">← Senarai</a>
+        <a href="../index.html" class="shrink-0 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50">← Senarai</a>
         <h1 class="text-lg font-semibold tracking-tight text-slate-900">GCE Level 2</h1>
       </div>
       <p class="hidden text-sm text-slate-500 sm:block">Panduan langkah demi langkah · salin teks dengan selamat</p>

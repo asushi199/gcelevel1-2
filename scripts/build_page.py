@@ -1,4 +1,4 @@
-"""Build embeddable index.html from outline.json + docx media."""
+"""Build Level 1 guide to level1.html (hub stays at index.html)."""
 from __future__ import annotations
 
 import html
@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]  # gce-level-1-embed
 SITE_ROOT = ROOT.parent
 DOCX = SITE_ROOT / "gce level 1.docx"
 OUTLINE = Path(__file__).resolve().parent / "outline.json"
-OUT_HTML = ROOT / "index.html"
+OUT_HTML = ROOT / "level1.html"
 MEDIA_DIR = ROOT / "media"
 
 # Anchor id -> block index (first paragraph / figure at or after this step)
@@ -107,6 +107,7 @@ MANUAL_COPIES_STATIC: dict[int, list[tuple[str, str]]] = {
     93: [("Nama assignment", "Capital Cities")],
     125: [("Nama topic", "Cities")],
     221: [("Tajuk dokumen", "Supply List")],
+    299: [("Ayat tampal", "Supply List Committee")],
 }
 
 
@@ -932,7 +933,7 @@ def build_html(blocks: list[dict], manual: dict[int, list[tuple[str, str]]]) -> 
   <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
     <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
       <div class="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
-        <a href="./levels.html" class="shrink-0 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50">← Senarai</a>
+        <a href="./index.html" class="shrink-0 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50">← Senarai</a>
         <h1 class="text-lg font-semibold tracking-tight text-slate-900">GCE Level 1</h1>
       </div>
       <p class="hidden text-sm text-slate-500 sm:block">Panduan langkah demi langkah · salin teks dengan selamat</p>
